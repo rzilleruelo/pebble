@@ -1,0 +1,5 @@
+Pebble
+Copyright 2015 Groupon
+
+This product includes software developed at
+Groupon (http://www.groupon.com)
