@@ -1,0 +1,46 @@
+package org.pebble.core.decoding.iterators.small;
+
+/*
+ *  Copyright 2015 Groupon
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+import org.pebble.UnitTest;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.junit.rules.ExpectedException;
+
+import java.io.IOException;
+
+import static org.pebble.core.decoding.iterators.small.BaseListIteratorHelper.BaseListIteratorBuilder;
+import static org.pebble.core.decoding.iterators.small.Helper.getInput;
+
+@Category(UnitTest.class)
+public class BaseListIteratorRemoveTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
+    @Test
+    public void itShouldThrowsUnsupportedOperationExceptionExceptionWhenCallingRemove() throws IOException {
+        final Helper.Input input = getInput("1 1 1");
+        final int listIndex = 1;
+        final BaseListIterator baseListIterator = new BaseListIteratorBuilder(input, listIndex).build();
+        expectedException.expect(UnsupportedOperationException.class);
+        expectedException.expectMessage("The list is immutable");
+
+        baseListIterator.remove();
+    }
+}
