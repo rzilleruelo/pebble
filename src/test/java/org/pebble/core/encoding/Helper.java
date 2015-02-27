@@ -16,7 +16,7 @@ package org.pebble.core.encoding;
  *  limitations under the License.
  */
 
-import org.pebble.core.encoding.small.IntOutputOffset;
+import org.pebble.core.encoding.ints.IntOutputOffset;
 
 import java.io.IOException;
 

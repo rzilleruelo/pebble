@@ -24,7 +24,7 @@ import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntRBTreeSet;
 import it.unimi.dsi.fastutil.ints.IntSortedSet;
 import it.unimi.dsi.io.OutputBitStream;
-import org.pebble.core.encoding.small.datastructures.IntReferenceListsStore;
+import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
 import org.pebble.core.exceptions.NotStrictlyIncrementalListException;
 
 import java.io.IOException;
@@ -510,7 +510,7 @@ public class OutputSuccinctStream extends OutputBitStream {
      * <ul>
      *     <li>
      *         Writes the reference (see
-     *         {@link #writeReference(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.small.datastructures.IntReferenceListsStore) writeReference}).
+     *         {@link #writeReference(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore) writeReference}).
      *     </li>
      *     <li>
      *         Writes the intervals from remaining list (see
@@ -551,7 +551,7 @@ public class OutputSuccinctStream extends OutputBitStream {
      *     </li>
      *     <li>
      *         Writes the reference (see
-     *         {@link #writeReference(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.small.datastructures.IntReferenceListsStore) writeReference}).
+     *         {@link #writeReference(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore) writeReference}).
      *     </li>
      *     <li>
      *         Writes the intervals from remaining list (see
@@ -589,7 +589,7 @@ public class OutputSuccinctStream extends OutputBitStream {
      * <ul>
      *     <li>
      *         Writes values in lists as strictly incremental list (see
-     *         {@link #writeStrictlyIncrementalList(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.small.datastructures.IntReferenceListsStore) writeStrictlyIncrementalList}).
+     *         {@link #writeStrictlyIncrementalList(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore) writeStrictlyIncrementalList}).
      *     </li>
      *     <li>
      *         Replaces the values from original list, for its respective index on the previous list of values.

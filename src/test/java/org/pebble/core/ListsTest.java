@@ -19,12 +19,12 @@ package org.pebble.core;
 import org.pebble.FastIntegrationTest;
 import org.pebble.core.decoding.PebbleBytesStore;
 import org.pebble.core.encoding.OutputSuccinctStream;
-import org.pebble.core.encoding.small.datastructures.IntReferenceListsIndex;
-import org.pebble.core.encoding.small.datastructures.IntReferenceListsStore;
-import org.pebble.core.encoding.small.datastructures.InvertedListIntReferenceListsIndex;
+import org.pebble.core.encoding.ints.datastructures.IntReferenceListsIndex;
+import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
+import org.pebble.core.encoding.ints.datastructures.InvertedListIntReferenceListsIndex;
 import org.pebble.core.encoding.Helper;
-import org.pebble.core.decoding.iterators.small.Helper.Input;
-import org.pebble.core.decoding.iterators.small.ListIterator;
+import org.pebble.core.decoding.iterators.ints.Helper.Input;
+import org.pebble.core.decoding.iterators.ints.ListIterator;
 import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntIterator;
@@ -34,10 +34,10 @@ import org.junit.experimental.categories.Category;
 
 import java.io.IOException;
 
-import static org.pebble.core.encoding.small.datastructures.Helper.translateToUtilsCollection;
+import static org.pebble.core.encoding.ints.datastructures.Helper.translateToUtilsCollection;
 import static org.pebble.core.encoding.Helper.getOutput;
 import static org.pebble.core.encoding.Helper.toBinaryString;
-import static org.pebble.core.decoding.iterators.small.Helper.getInput;
+import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
 import static junit.framework.TestCase.assertEquals;
 
 @Category(FastIntegrationTest.class)

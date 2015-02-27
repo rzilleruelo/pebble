@@ -42,19 +42,19 @@ On following sections the basics around encoding and decoding lists is explained
 The core pebble API exposes the compression methods through the
 [OutputSuccinctStream](//groupon.github.io/pebble/org/pebble/core/encoding/OutputSuccinctStream.html)
 class. This class exposes three main methods:
-* [writeStrictlyIncrementalList](//groupon.github.io/pebble/org/pebble/core/encoding/OutputSuccinctStream.html#writeStrictlyIncrementalList(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.small.datastructures.IntReferenceListsStore))
+* [writeStrictlyIncrementalList](//groupon.github.io/pebble/org/pebble/core/encoding/OutputSuccinctStream.html#writeStrictlyIncrementalList(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore))
   used to compress strictly incremental lists, such as:
   ```java
   {4, 6, 7, 8, 11, 12}
   ```
 
-* [writeIncrementalList](//groupon.github.io/pebble/org/pebble/core/encoding/OutputSuccinctStream.html#writeIncrementalList(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.small.datastructures.IntReferenceListsStore))
+* [writeIncrementalList](//groupon.github.io/pebble/org/pebble/core/encoding/OutputSuccinctStream.html#writeIncrementalList(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore))
   used to compress incremental lists, such as:
   ```java
   {4, 6, 6, 6, 6, 7, 8, 8, 8, 11, 11, 12, 12, 12, 12, 12}
   ```
 
-* [writeList](//groupon.github.io/pebble/org/pebble/core/encoding/OutputSuccinctStream.html#writeList(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.small.datastructures.IntReferenceListsStore))
+* [writeList](//groupon.github.io/pebble/org/pebble/core/encoding/OutputSuccinctStream.html#writeList(it.unimi.dsi.fastutil.ints.IntList, int, int, org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore))
   used to compress lists with none order restrictions, such as:
   ```java
   {6, 12, 11, 8, 12, 8, 6, 12, 8, 12, 6, 11, 6, 4, 12, 7}
@@ -171,12 +171,10 @@ while (iterator.hasNext()) {
 
 TODO
 ----
-* Refactor structure for storing and retrieving compressed data. Build an interface, to allow custom storage and
-  retrieving strategies.
-* Explore the usage of [Trove](http://trove.starlight-systems.com/) library instead of
-  [FastUtils WebGraph](http://fastutil.di.unimi.it/) library.
 * Add support for lists of `long` type.
 * Add support for storing more than integer values, such as: uuids, timestamps, finite text, free text and real numbers.
+* Explore the usage of [Trove](http://trove.starlight-systems.com/) library instead of
+  [FastUtils WebGraph](http://fastutil.di.unimi.it/) library.
 * Add support for storing complex data types. Data that is build on top primitive data types.
 * Implement java.util.Map interface.
 * Explore hbase memory cache.
