@@ -1,6 +1,6 @@
 package org.pebble.core.encoding.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +16,12 @@ package org.pebble.core.encoding.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
 
-import static org.pebble.core.encoding.Helper.getOutputOffset;
 import static junit.framework.TestCase.assertEquals;
 
 @Category(UnitTest.class)
@@ -45,7 +44,7 @@ public class IntOutputOffsetGetWriteDifferenceOffsetTest {
          *  0101 0 1 0101                                  Delta Encoding.
          */
         final int expectedOffset = 10;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDifferenceOffset(list, referenceList);
 
@@ -69,7 +68,7 @@ public class IntOutputOffsetGetWriteDifferenceOffsetTest {
          *  0100 1 01100                                 Delta Encoding.
          */
         final int expectedOffset = 10;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDifferenceOffset(list, referenceList);
 
@@ -93,7 +92,7 @@ public class IntOutputOffsetGetWriteDifferenceOffsetTest {
          *  01101 0 1 0101 1 0100                       Delta Encoding.
          */
         final int expectedOffset = 16;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDifferenceOffset(list, referenceList);
 
@@ -117,7 +116,7 @@ public class IntOutputOffsetGetWriteDifferenceOffsetTest {
          *  01100 0 1 0101 1                            Delta Encoding.
          */
         final int expectedOffset = 12;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDifferenceOffset(list, referenceList);
 
@@ -141,7 +140,7 @@ public class IntOutputOffsetGetWriteDifferenceOffsetTest {
          *  0101 0 1 0101                           Delta Encoding.
          */
         final int expectedOffset = 10;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDifferenceOffset(list, referenceList);
 
@@ -165,7 +164,7 @@ public class IntOutputOffsetGetWriteDifferenceOffsetTest {
          *  01101 0 1 0101 1 1                     Delta Encoding.
          */
         final int expectedOffset = 13;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDifferenceOffset(list, referenceList);
 
@@ -189,7 +188,7 @@ public class IntOutputOffsetGetWriteDifferenceOffsetTest {
          *  0101 0 1 0101                                  Delta Encoding.
          */
         final int expectedOffset = 10;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDifferenceOffset(list, referenceList);
 
@@ -213,7 +212,7 @@ public class IntOutputOffsetGetWriteDifferenceOffsetTest {
          *  1 1                               Delta Encoding.
          */
         final int expectedOffset = 2;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDifferenceOffset(list, referenceList);
 

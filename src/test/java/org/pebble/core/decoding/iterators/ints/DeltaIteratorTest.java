@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,22 +16,23 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
-import org.pebble.core.encoding.DefaultParametersValues;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
+import org.pebble.core.decoding.iterators.Helper;
+import org.pebble.core.encoding.DefaultParametersValues;
 
-import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
 import static org.junit.Assert.assertEquals;
+import static org.pebble.core.decoding.iterators.Helper.getInput;
 
 @Category(UnitTest.class)
 public class DeltaIteratorTest {
 
     @Test
     public void whenThereIsAnEncodedNonEmptyListItShouldRecoverOriginalListSuccessfully() throws Exception {
-        Helper.Input input = getInput("01111 00000000000000000000000000000001 1 1 0100 0100 0101");
+        Helper.Input input = getInput("01111 0000000000000000000000000000001 1 1 0100 0100 0101");
         final IntList expectedList = new IntArrayList(new int[] {1, 2, 3, 5, 7, 10});
         final IntList list = new IntArrayList();
 

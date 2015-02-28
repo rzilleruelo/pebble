@@ -1,6 +1,6 @@
 package org.pebble.core.encoding;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,21 +16,21 @@ package org.pebble.core.encoding;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
-import org.pebble.core.exceptions.NotStrictlyIncrementalListException;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
+import org.pebble.UnitTest;
+import org.pebble.core.exceptions.NotStrictlyIncrementalListException;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.pebble.core.encoding.Helper.getOutput;
 import static org.pebble.core.encoding.Helper.toBinaryString;
-import static junit.framework.TestCase.assertEquals;
 
 @Category(UnitTest.class)
-public class OutputSuccinctStreamWriteDifferenceTest {
+public class IntsOutputSuccinctStreamWriteDifferenceTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();

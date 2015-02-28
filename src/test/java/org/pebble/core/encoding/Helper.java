@@ -1,6 +1,6 @@
 package org.pebble.core.encoding;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,9 +16,13 @@ package org.pebble.core.encoding;
  *  limitations under the License.
  */
 
-import org.pebble.core.encoding.ints.IntOutputOffset;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Helper {
 
@@ -40,10 +44,6 @@ public class Helper {
         return new Output(buffer, out);
     }
 
-    public static IntOutputOffset getOutputOffset() {
-        return new IntOutputOffset();
-    }
-
     public static class Output {
 
         public final byte[] buffer;
@@ -58,6 +58,32 @@ public class Helper {
             stream.close();
         }
 
+    }
+
+    public static <T, Q extends Map<T, IntList>> Map<T, List<Integer>> translateToUtilsCollection(final Q map) {
+        //TODO: fix equals of Int2ReferenceMap or replace with trove library.
+        final Map<T, List<Integer>> translatedMap = new HashMap<T, List<Integer>>();
+        List<Integer> list;
+        for(Map.Entry<T, IntList> entry : map.entrySet()) {
+            translatedMap.put(entry.getKey(), list = new ArrayList<Integer>());
+            for(int value : entry.getValue()) {
+                list.add(value);
+            }
+        }
+        return translatedMap;
+    }
+
+    public static <T, Q extends List<T>> List<List<T>> translateToUtilsCollection(final Q[] lists) {
+        //TODO: fix equals of Int2ReferenceMap or replace with trove library.
+        final List<List<T>> translatedLists = new ArrayList<List<T>>();
+        List<T> translatedList;
+        for(Q list : lists) {
+            translatedLists.add(translatedList = new ArrayList<T>());
+            for(T value : list) {
+                translatedList.add(value);
+            }
+        }
+        return translatedLists;
     }
 
 }

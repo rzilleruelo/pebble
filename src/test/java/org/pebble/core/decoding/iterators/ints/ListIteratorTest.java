@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +16,14 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
-import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
-import org.pebble.core.decoding.PebbleBytesStore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
+import org.pebble.UnitTest;
+import org.pebble.core.decoding.PebbleBytesStore;
+import org.pebble.core.decoding.iterators.Helper;
+import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
 
 import java.io.IOException;
 

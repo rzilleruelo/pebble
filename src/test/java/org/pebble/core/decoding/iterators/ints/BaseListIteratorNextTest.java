@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,9 +16,9 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;

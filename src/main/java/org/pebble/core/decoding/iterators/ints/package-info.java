@@ -1,9 +1,9 @@
 /**
- * Provides Pebble's core list decompression iterators specific for lists containing elements of int type.
+ * Provides Pebble's core list decompression iterators specific for lists containing elements of <code>int</code> type.
  */
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");

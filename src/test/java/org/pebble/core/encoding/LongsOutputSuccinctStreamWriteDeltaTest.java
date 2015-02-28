@@ -1,6 +1,6 @@
 package org.pebble.core.encoding;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,21 +16,22 @@ package org.pebble.core.encoding;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
-import org.pebble.core.exceptions.NotStrictlyIncrementalListException;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.longs.LongArrayList;
+import it.unimi.dsi.fastutil.longs.LongList;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
+import org.pebble.UnitTest;
+import org.pebble.core.exceptions.DeltaValueIsTooBigException;
+import org.pebble.core.exceptions.NotStrictlyIncrementalListException;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.pebble.core.encoding.Helper.getOutput;
 import static org.pebble.core.encoding.Helper.toBinaryString;
-import static junit.framework.TestCase.assertEquals;
 
 @Category(UnitTest.class)
-public class OutputSuccinctStreamWriteDeltaTest {
+public class LongsOutputSuccinctStreamWriteDeltaTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -38,7 +39,7 @@ public class OutputSuccinctStreamWriteDeltaTest {
     @Test
     public void itShouldWriteDeltaSuccinctRepresentationSuccessfully() throws Exception {
         final int valueBitSize = 1;
-        final IntList list = new IntArrayList(new int[] {1, 2, 3, 5, 7, 10});
+        final LongList list = new LongArrayList(new long[] {1L, 2L, 3L, 5L, 7L, 10L});
         /**
          * 6     1 0 0 1    1    2    Delta list.
          * 7     1 1 1 2    2    3    Add 1 to ensure non zeros.
@@ -61,7 +62,7 @@ public class OutputSuccinctStreamWriteDeltaTest {
     @Test
     public void whenListIsEmptyItShouldWriteDeltaSuccinctRepresentationSuccessfully() throws Exception {
         final int valueBitSize = 1;
-        final IntList list = new IntArrayList(new int[] {});
+        final LongList list = new LongArrayList(new long[] {});
         final String expectedOutput = "1".replace(" ", "");
         final int expectedOffset = 1;
         final Helper.Output out = getOutput();
@@ -76,10 +77,21 @@ public class OutputSuccinctStreamWriteDeltaTest {
     @Test
     public void itShouldThrowAnExceptionWhenListIsNonStrictlyIncremental() throws Exception {
         final int valueBitSize = 1;
-        final IntList list = new IntArrayList(new int[] {1, 2, 3, 5, 0, 7, 10, 11, 16, 19});
+        final LongList list = new LongArrayList(new long[] {1L, 2L, 3L, 5L, 0L, 7L, 10L, 11L, 16L, 19L});
         final Helper.Output out = getOutput();
         expectedException.expect(NotStrictlyIncrementalListException.class);
         expectedException.expectMessage("List is not strictly incremental, found 0 after 5");
+
+        out.stream.writeDelta(list, valueBitSize);
+    }
+
+    @Test
+    public void itShouldThrowAnExceptionWhenTheDeltaBetweenItsElementsIsBiggerThanMaxInteger() throws Exception {
+        final int valueBitSize = 1;
+        final LongList list = new LongArrayList(new long[] {0L, 2L + Integer.MAX_VALUE});
+        final Helper.Output out = getOutput();
+        expectedException.expect(DeltaValueIsTooBigException.class);
+        expectedException.expectMessage("Delta value between 2147483649 and 0, is too big");
 
         out.stream.writeDelta(list, valueBitSize);
     }

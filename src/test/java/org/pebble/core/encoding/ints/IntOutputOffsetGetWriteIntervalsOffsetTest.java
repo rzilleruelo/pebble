@@ -1,6 +1,6 @@
 package org.pebble.core.encoding.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +16,12 @@ package org.pebble.core.encoding.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
 
-import static org.pebble.core.encoding.Helper.getOutputOffset;
 import static junit.framework.TestCase.assertEquals;
 
 @Category(UnitTest.class)
@@ -33,7 +32,7 @@ public class IntOutputOffsetGetWriteIntervalsOffsetTest {
         final int valueBitSize = 1;
         final IntList list = new IntArrayList(new int[] {1, 2, 3, 5, 6, 7, 10, 11, 16, 19});
         final int expectedOffset = 1;
-        final IntOutputOffset outputOffset = getOutputOffset();
+        final IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteIntervalsOffset(list, valueBitSize);
 
@@ -45,7 +44,7 @@ public class IntOutputOffsetGetWriteIntervalsOffsetTest {
         final int valueBitSize = 1;
         final IntList list = new IntArrayList(new int[] {1, 3, 4});
         final int expectedOffset = 1;
-        final IntOutputOffset outputOffset = getOutputOffset();
+        final IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteIntervalsOffset(list, valueBitSize);
 
@@ -69,7 +68,7 @@ public class IntOutputOffsetGetWriteIntervalsOffsetTest {
          * 01100 111 1 0101 1 1 0101                                 Delta Encoding.
          */
         final int expectedOffset = 19;
-        final IntOutputOffset outputOffset = getOutputOffset();
+        final IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteIntervalsOffset(list, valueBitSize);
 
@@ -93,7 +92,7 @@ public class IntOutputOffsetGetWriteIntervalsOffsetTest {
          * 01100 111 1 0101 1 1 0101                                 Delta Encoding.
          */
         final int expectedOffset = 19;
-        final IntOutputOffset outputOffset = getOutputOffset();
+        final IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteIntervalsOffset(list, valueBitSize);
 
@@ -114,9 +113,8 @@ public class IntOutputOffsetGetWriteIntervalsOffsetTest {
          * 01-0 111 1      Binary Gamma Prefix and Binary Gamma Suffix.
          * 0100 111 1      Delta Encoding.
          */
-        final String expectedOutput = "0100 00000000000000000000000000000111 1".replace(" ", "");
         final int expectedOffset = 8;
-        final IntOutputOffset outputOffset = getOutputOffset();
+        final IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteIntervalsOffset(list, valueBitSize);
 

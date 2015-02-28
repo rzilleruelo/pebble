@@ -1,6 +1,6 @@
 package org.pebble.core.encoding.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +16,12 @@ package org.pebble.core.encoding.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
 
-import static org.pebble.core.encoding.Helper.getOutputOffset;
 import static junit.framework.TestCase.assertEquals;
 
 @Category(UnitTest.class)
@@ -41,7 +40,7 @@ public class IntOutputOffsetGetWriteDeltaOffsetTest {
          * 01111 1 1 1 0100 0100 0101 Delta Encoding.
          */
         final int expectedOffset = 20;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDeltaOffset(list, valueBitSize);
 
@@ -53,7 +52,7 @@ public class IntOutputOffsetGetWriteDeltaOffsetTest {
         final int valueBitSize = 1;
         final IntList list = new IntArrayList(new int[] {});
         final int expectedOffset = 1;
-        IntOutputOffset outputOffset = getOutputOffset();
+        IntOutputOffset outputOffset = new IntOutputOffset();
 
         final int offset = outputOffset.getWriteDeltaOffset(list, valueBitSize);
 

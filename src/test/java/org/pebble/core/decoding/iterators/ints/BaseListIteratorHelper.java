@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +17,7 @@ package org.pebble.core.decoding.iterators.ints;
  */
 
 import it.unimi.dsi.io.InputBitStream;
+import org.pebble.core.decoding.iterators.Helper;
 import org.pebble.core.encoding.DefaultParametersValues;
 import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
 
@@ -48,7 +49,7 @@ public class BaseListIteratorHelper {
                 DefaultParametersValues.INT_BITS,
                 DefaultParametersValues.DEFAULT_MIN_INTERVAL_SIZE,
                 input.stream,
-                new BytesArrayPebbleBytesStore(input.buffer, new long[] {0l})
+                new BytesArrayPebbleBytesStore(input.buffer, new long[] {0L})
             ) {
                 @Override
                 protected ReferenceIterator initializeReferenceIterator(int listIndex, InputBitStream inputBitStream)

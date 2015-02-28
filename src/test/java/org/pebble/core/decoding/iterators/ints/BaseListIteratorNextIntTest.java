@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,18 +16,19 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
+import org.pebble.UnitTest;
+import org.pebble.core.decoding.iterators.Helper;
 
 import java.io.IOException;
 
-import static org.pebble.core.decoding.iterators.ints.BaseListIteratorHelper.BaseListIteratorBuilder;
-import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.pebble.core.decoding.iterators.Helper.getInput;
+import static org.pebble.core.decoding.iterators.ints.BaseListIteratorHelper.BaseListIteratorBuilder;
 
 @Category(UnitTest.class)
 public class BaseListIteratorNextIntTest {
@@ -59,9 +60,9 @@ public class BaseListIteratorNextIntTest {
         whenReferenceAndIntervalListsHasElementsAndReferenceListValueIsTheSmallestNextIntShouldReturnExpectedValue()
     throws IOException {
         final Helper.Input input = getInput(
-            "0100 1 1" +                                // Reference list bit=1 blocks=[1]
-            "0100 00000000000000000000000000000111 1" + // Interval list [7, 1]
-            "1"                                         // Empty delta list
+            "0100 1 1" +                               // Reference list bit=1 blocks=[1]
+            "0100 0000000000000000000000000000111 1" + // Interval list [7, 1]
+            "1"                                        // Empty delta list
         );
         final int listIndex = 1;
         final BaseListIteratorBuilder baseListIteratorBuilder = new BaseListIteratorBuilder(input, listIndex);
@@ -80,9 +81,9 @@ public class BaseListIteratorNextIntTest {
         whenReferenceIntervalAndDeltaListsHasElementsAndReferenceListValueIsTheSmallestNextIntShouldReturnExpectedValue()
     throws IOException {
         final Helper.Input input = getInput(
-            "0100 1 1" +                                // Reference list bit=1 blocks=[1]
-            "0100 00000000000000000000000000000111 1" + // Interval list [7, 1]
-            "0100 00000000000000000000000000000011"     // Delta list [3]
+            "0100 1 1" +                               // Reference list bit=1 blocks=[1]
+            "0100 0000000000000000000000000000111 1" + // Interval list [7, 1]
+            "0100 0000000000000000000000000000011"     // Delta list [3]
         );
         final int listIndex = 1;
         final BaseListIteratorBuilder baseListIteratorBuilder = new BaseListIteratorBuilder(input, listIndex);
@@ -99,9 +100,9 @@ public class BaseListIteratorNextIntTest {
     @Test
     public void whenOnlyIntervalListHaveElementsNextIntShouldReturnExpectedValue() throws IOException {
         final Helper.Input input = getInput(
-            "1"                                       + // Empty Reference list
-            "0100 00000000000000000000000000000111 1" + // Interval list [7, 1]
-            "1"                                         // Empty delta list
+            "1"                                      + // Empty Reference list
+            "0100 0000000000000000000000000000111 1" + // Interval list [7, 1]
+            "1"                                        // Empty delta list
         );
         final int listIndex = 1;
         final BaseListIteratorBuilder baseListIteratorBuilder = new BaseListIteratorBuilder(input, listIndex);
@@ -119,9 +120,9 @@ public class BaseListIteratorNextIntTest {
         whenReferenceAndIntervalListsHasElementsAndIntervalListValueIsTheSmallestNextIntShouldReturnExpectedValue()
     throws IOException {
         final Helper.Input input = getInput(
-            "0100 1 1" +                                // Reference list bit=1 blocks=[1]
-            "0100 00000000000000000000000000000111 1" + // Interval list [7, 1]
-            "1"                                         // Empty delta list
+            "0100 1 1" +                               // Reference list bit=1 blocks=[1]
+            "0100 0000000000000000000000000000111 1" + // Interval list [7, 1]
+            "1"                                        // Empty delta list
         );
         final int listIndex = 1;
         final BaseListIteratorBuilder baseListIteratorBuilder = new BaseListIteratorBuilder(input, listIndex);
@@ -138,9 +139,9 @@ public class BaseListIteratorNextIntTest {
     @Test
     public void whenOnlyDeltaListHaveElementsNextIntShouldReturnExpectedValue() throws IOException {
         final Helper.Input input = getInput(
-            "1" +                                   // Empty Reference list
-            "1" +                                   // Empty intervals list
-            "0100 00000000000000000000000000000011" // Delta list [3]
+            "1" +                                  // Empty Reference list
+            "1" +                                  // Empty intervals list
+            "0100 0000000000000000000000000000011" // Delta list [3]
         );
         final int listIndex = 1;
         final BaseListIteratorBuilder baseListIteratorBuilder = new BaseListIteratorBuilder(input, listIndex);
@@ -158,9 +159,9 @@ public class BaseListIteratorNextIntTest {
         whenReferenceAndDeltaListsHasElementsAndDeltaListValueIsTheSmallestNextIntShouldReturnExpectedValue()
     throws IOException {
         final Helper.Input input = getInput(
-            "0100 1 1" +                            // Reference list bit=1 blocks=[1]
-            "1" +                                   // Empty intervals list
-            "0100 00000000000000000000000000000011" // Delta list [3]
+            "0100 1 1" +                           // Reference list bit=1 blocks=[1]
+            "1" +                                  // Empty intervals list
+            "0100 0000000000000000000000000000011" // Delta list [3]
         );
         final int listIndex = 1;
         final BaseListIteratorBuilder baseListIteratorBuilder = new BaseListIteratorBuilder(input, listIndex);
@@ -179,9 +180,9 @@ public class BaseListIteratorNextIntTest {
         whenIntervalAndDeltaListsHasElementsAndIntervalListValueIsTheSmallestNextIntShouldReturnExpectedValue()
     throws IOException {
         final Helper.Input input = getInput(
-            "1" +                                       // Empty Reference list
-            "0100 00000000000000000000000000000111 1" + // Interval list [7, 1]
-            "0100 00000000000000000000000000001000"     // Delta list [8]
+            "1" +                                      // Empty Reference list
+            "0100 0000000000000000000000000000111 1" + // Interval list [7, 1]
+            "0100 0000000000000000000000000001000"     // Delta list [8]
         );
         final int listIndex = 1;
         final BaseListIteratorBuilder baseListIteratorBuilder = new BaseListIteratorBuilder(input, listIndex);
@@ -199,9 +200,9 @@ public class BaseListIteratorNextIntTest {
         whenIntervalAndDeltaListsHasElementsAndDeltaListValueIsTheSmallestNextIntShouldReturnExpectedValue()
     throws IOException {
         final Helper.Input input = getInput(
-            "1" +                                       // Empty Reference list
-            "0100 00000000000000000000000000000111 1" + // Interval list [7, 1]
-            "0100 00000000000000000000000000000011"     // Delta list [3]
+            "1" +                                      // Empty Reference list
+            "0100 0000000000000000000000000000111 1" + // Interval list [7, 1]
+            "0100 0000000000000000000000000000011"     // Delta list [3]
         );
         final int listIndex = 1;
         final BaseListIteratorBuilder baseListIteratorBuilder = new BaseListIteratorBuilder(input, listIndex);

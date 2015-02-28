@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +16,16 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
-import org.pebble.core.encoding.DefaultParametersValues;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
+import org.pebble.core.decoding.iterators.Helper;
+import org.pebble.core.encoding.DefaultParametersValues;
 
-import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
 import static org.junit.Assert.assertEquals;
+import static org.pebble.core.decoding.iterators.Helper.getInput;
 
 @Category(UnitTest.class)
 public class IntervalIteratorTest {
@@ -33,7 +34,7 @@ public class IntervalIteratorTest {
     public void whenThereIsAnEncodedNonEmptyIntervalsListItShouldRecoverOriginalIntervalsSuccessfully()
         throws Exception
     {
-        Helper.Input input = getInput("01100 00000000000000000000000000000111 1 0101 1 1 0101");
+        Helper.Input input = getInput("01100 0000000000000000000000000000111 1 0101 1 1 0101");
         final IntList expectedList = new IntArrayList(new int[] {7, 8, 9, 10, 14, 15, 16, 17, 19, 20, 21, 22, 23, 24});
         final IntList list = new IntArrayList();
 

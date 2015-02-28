@@ -1,6 +1,6 @@
 package org.pebble.core;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,32 +16,31 @@ package org.pebble.core;
  *  limitations under the License.
  */
 
-import org.pebble.FastIntegrationTest;
-import org.pebble.core.decoding.PebbleBytesStore;
-import org.pebble.core.encoding.OutputSuccinctStream;
-import org.pebble.core.encoding.ints.datastructures.IntReferenceListsIndex;
-import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
-import org.pebble.core.encoding.ints.datastructures.InvertedListIntReferenceListsIndex;
-import org.pebble.core.encoding.Helper;
-import org.pebble.core.decoding.iterators.ints.Helper.Input;
-import org.pebble.core.decoding.iterators.ints.IncrementalListIterator;
-import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.FastIntegrationTest;
+import org.pebble.core.decoding.PebbleBytesStore;
+import org.pebble.core.decoding.iterators.Helper.Input;
+import org.pebble.core.decoding.iterators.ints.ListIterator;
+import org.pebble.core.encoding.Helper;
+import org.pebble.core.encoding.OutputSuccinctStream;
+import org.pebble.core.encoding.ints.datastructures.IntReferenceListsIndex;
+import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
+import org.pebble.core.encoding.ints.datastructures.InvertedListIntReferenceListsIndex;
+import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
 
 import java.io.IOException;
 
-import static org.pebble.core.encoding.ints.datastructures.Helper.translateToUtilsCollection;
+import static junit.framework.TestCase.assertEquals;
+import static org.pebble.core.decoding.iterators.Helper.getInput;
 import static org.pebble.core.encoding.Helper.getOutput;
 import static org.pebble.core.encoding.Helper.toBinaryString;
-import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
-import static junit.framework.TestCase.assertEquals;
 
 @Category(FastIntegrationTest.class)
-public class IncrementalListsTest {
+public class IntListsTest {
 
     @Test
     public void itShouldCompressLists() throws IOException {
@@ -59,32 +58,34 @@ public class IncrementalListsTest {
         );
         final OutputSuccinctStream outputSuccinctStream = new OutputSuccinctStream(out.buffer);
         final IntList[] lists = new IntList[] {
-            new IntArrayList(new int[] {5, 8, 12, 13}),
-            new IntArrayList(new int[] {5, 5, 5, 8, 12, 12, 12, 12, 12, 13})
+            new IntArrayList(new int[] {12, 8, 5, 12, 13, 5, 13, 8}),
+            new IntArrayList(new int[] {13, 13, 5, 8, 5, 8, 12, 13, 12, 12})
         };
         /**
-         * list=[5, 8, 12, 13]
-         * repetitions=[0] reference=[0], intervals=[0], delta=[4, 5, 2, 3, 0]
-         * 1               1              1              101   00101 11   100 1
-         * 1               1              1              3-01  00101 2-1  3-00  1
-         * 1               1              1              11-01 00101 01-1 11-00 1
-         * 1               1              1              01101 00101 0101 01100 1
-         * list=[5, 5, 5, 8, 12, 12, 12, 12, 12, 13]
-         * repetitions=[2, 0, 1, 1, 3] reference=[1, 0, 1], intervals=[0], delta=[0]
-         * 11   1 10   10   100        10    1 1            1              1
-         * 2-1  1 2-0  2-0  3-00       2-0   1 1            1              1
-         * 10-1 1 10-0 10-0 11-00      10-0  1 1            1              1
-         * 0101 1 0100 0100 01100      0100  1 1            1              1
+         * list=[12, 8, 5, 12, 13, 5, 13, 8, 5, 12, 8]
+         * values=[5, 8, 12, 13] indexes=[2, 1, 0, 2, 3, 0, 3, 1, 0, 2, 1]
+         * reference=[0], intervals=[0], delta=[4, 5, 2, 3, 0],   indexes=[4, 4, 1, 1, 4, 2, 5, 6, 3]
+         * 1              1              101   00101 11   100   1 101   101   10   10   101   11   110   111   100
+         * 1              1              3-01  00101 2-1  3-00  1 3-01  3-01  2-0  2-0  3-01  2-1  3-10  3-11  3-00
+         * 1              1              11-01 00101 01-1 11-00 1 11-01 11-01 10-0 10-0 11-01 10-1 11-10 11-11 11-00
+         * 1              1              01101 00101 0101 01100 1 01101 01101 0100 0100 01101 0101 01110 01111 01100
+         * list=[13, 13, 5, 8, 5, 8, 12, 13, 12, 12]
+         * values=[5, 8, 12, 13] indexes=[3, 3, 0, 1, 0, 1, 2, 3, 2, 2]
+         * reference=[1, 0, 1], intervals=[0], delta=[0], indexes=[6, 6, 0, 5, 2, 1, 2, 2, 2, 1, 0]
+         * 10    1 1            1              1          111   111   1 110   11   10   11   11   11   10   1
+         * 2-0   1 1            1              1          3-11  3-11  1 3-10  2-1  2-0  2-1  2-1  2-1  2-0  1
+         * 10-0  1 1            1              1          11-11 11-11 1 11-10 10-1 10-0 10-1 10-1 10-1 10-0 1
+         * 0100  1 1            1              1          01111 01111 1 01110 0101 0100 0101 0101 0101 0100 1
          */
         final String expectedOutput = (
-            "1 1 1 01101 00101 0101 01100 1" +
-            "0101 1 0100 0100 01100 0100 1 1 1 1"
+            "1 1 01101 00101 0101 01100 1 01101 01101 0100 0100 01101 0101 01110 01111 01100" +
+            "0100 1 1 1 1 01111 01111 1 01110 0101 0100 0101 0101 0101 0100 1"
         ).replace(" ", "");
-        final int expectedTotalOffset = 49;
+        final int expectedTotalOffset = 113;
 
         int totalOffset = 0;
         for(int i = 0; i < lists.length; i++) {
-            totalOffset += outputSuccinctStream.writeIncrementalList(lists[i], i, valueBitSize, referenceListsStore);
+            totalOffset += outputSuccinctStream.writeList(lists[i], i, valueBitSize, referenceListsStore);
         }
 
         outputSuccinctStream.flush();
@@ -96,29 +97,32 @@ public class IncrementalListsTest {
     @Test
     public void itShouldDecompressLists() throws IOException {
         final Input input = getInput(
-            "1 1 1 01101 00101 0101 01100 1" +
-            "0101 1 0100 0100 01100 0100 1 1 1 1"
+            "1 1 01101 00101 0101 01100 1 01101 01101 0100 0100 01101 0101 01110 01111 01100" +
+            "0100 1 1 1 1 01111 01111 1 01110 0101 0100 0101 0101 0101 0100 1"
         );
-        final long[] offsets = new long[] {0l, 23l};
+        final long[] offsets = new long[] {0L, 64L};
         final PebbleBytesStore bytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsets);
         final int valueBitSize = 5;
         final IntList[] expectedLists = new IntList[] {
-            new IntArrayList(new int[] {5, 8, 12, 13}),
-            new IntArrayList(new int[] {5, 5, 5, 8, 12, 12, 12, 12, 12, 13})
+            new IntArrayList(new int[] {12, 8, 5, 12, 13, 5, 13, 8}),
+            new IntArrayList(new int[] {13, 13, 5, 8, 5, 8, 12, 13, 12, 12})
         };
         final IntList[] lists = new IntList[expectedLists.length];
         IntList list;
         IntIterator iterator;
 
         for(int i = 0; i < lists.length; i++) {
-            iterator = IncrementalListIterator.build(i, valueBitSize, bytesStore);
+            iterator = ListIterator.build(i, valueBitSize, bytesStore);
             lists[i] = list = new IntArrayList();
             while(iterator.hasNext()) {
                 list.add(iterator.nextInt());
             }
         }
 
-        assertEquals(translateToUtilsCollection(expectedLists), translateToUtilsCollection(lists));
+        assertEquals(
+            Helper.<Integer, IntList>translateToUtilsCollection(expectedLists),
+            Helper.<Integer, IntList>translateToUtilsCollection(lists)
+        );
     }
 
 }

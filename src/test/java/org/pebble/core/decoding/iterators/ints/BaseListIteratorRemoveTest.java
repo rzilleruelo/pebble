@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,16 +16,17 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
+import org.pebble.UnitTest;
+import org.pebble.core.decoding.iterators.Helper;
 
 import java.io.IOException;
 
+import static org.pebble.core.decoding.iterators.Helper.getInput;
 import static org.pebble.core.decoding.iterators.ints.BaseListIteratorHelper.BaseListIteratorBuilder;
-import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
 
 @Category(UnitTest.class)
 public class BaseListIteratorRemoveTest {

@@ -1,6 +1,6 @@
 package org.pebble.core.encoding;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,22 +16,24 @@ package org.pebble.core.encoding;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.longs.LongArrayList;
+import it.unimi.dsi.fastutil.longs.LongList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.pebble.core.encoding.Helper.getOutput;
 import static org.pebble.core.encoding.Helper.toBinaryString;
-import static junit.framework.TestCase.assertEquals;
 
 @Category(UnitTest.class)
-public class OutputSuccinctStreamWriteRepetitionsTest {
+public class LongsOutputSuccinctStreamWriteRepetitionsTest {
 
     @Test
     public void whenRepetitionsItShouldWriteItsSuccinctRepresentationSuccessfully() throws Exception {
-        final IntList list = new IntArrayList(new int[] {1, 1, 2, 3, 3, 3, 5, 6, 6, 7, 10, 11, 11, 16, 19, 19});
+        final LongList list = new LongArrayList(
+            new long[] {1L, 1L, 2L, 3L, 3L, 3L, 5L, 6L, 6L, 7L, 10L, 11L, 11L, 16L, 19L, 19L}
+        );
         /**
          * {(0, 2), (2, 3), (4, 2), (7, 2), (9, 2)}    Repetitions Intervals.
          * 5      0  0  1    1    1    0 2    0 1    0 Delta Representation.
@@ -54,7 +56,7 @@ public class OutputSuccinctStreamWriteRepetitionsTest {
 
     @Test
     public void whenNoRepetitionsItShouldWriteItsSuccinctRepresentationSuccessfully() throws Exception {
-        final IntList list = new IntArrayList(new int[] {1, 2, 3, 5, 6, 7, 10, 11, 16, 19});
+        final LongList list = new LongArrayList(new long[] {1L, 2L, 3L, 5L, 6L, 7L, 10L, 11L, 16L, 19L});
         final String expectedOutput = "1".replace(" ", "");
         final int expectedOffset = 1;
         final Helper.Output out = getOutput();

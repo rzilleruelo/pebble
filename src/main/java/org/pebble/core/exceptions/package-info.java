@@ -3,7 +3,7 @@
  */
 package org.pebble.core.exceptions;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");

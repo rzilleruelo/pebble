@@ -1,6 +1,6 @@
 package org.pebble.core.encoding.ints.datastructures;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +16,15 @@ package org.pebble.core.encoding.ints.datastructures;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import it.unimi.dsi.fastutil.ints.Int2ReferenceMap;
 import it.unimi.dsi.fastutil.ints.Int2ReferenceOpenHashMap;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
+import org.pebble.core.encoding.Helper;
 
-import static org.pebble.core.encoding.ints.datastructures.Helper.translateToUtilsCollection;
 import static junit.framework.TestCase.assertEquals;
 
 @Category(UnitTest.class)
@@ -53,8 +53,8 @@ public class InvertedListIntReferenceListsIndexRemoveListFromListsInvertedIndexT
         listsIndex.removeListFromListsInvertedIndex(index, list);
 
         assertEquals(
-            translateToUtilsCollection(expectedListsInvertedIndex),
-            translateToUtilsCollection(listsIndex.listsInvertedIndex)
+            Helper.<Integer, Int2ReferenceMap<IntList>>translateToUtilsCollection(expectedListsInvertedIndex),
+            Helper.<Integer, Int2ReferenceMap<IntList>>translateToUtilsCollection(listsIndex.listsInvertedIndex)
         );
     }
 

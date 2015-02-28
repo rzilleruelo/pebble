@@ -1,6 +1,6 @@
 package org.pebble.core.decoding;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,12 +18,12 @@ package org.pebble.core.decoding;
 
 import it.unimi.dsi.io.InputBitStream;
 import org.junit.Test;
-import org.pebble.core.decoding.iterators.ints.Helper.Input;
 import org.junit.experimental.categories.Category;
 import org.pebble.UnitTest;
+import org.pebble.core.decoding.iterators.Helper.Input;
 
 import static org.junit.Assert.assertEquals;
-import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
+import static org.pebble.core.decoding.iterators.Helper.getInput;
 
 @Category(UnitTest.class)
 public class PebbleBytesStoreTest {

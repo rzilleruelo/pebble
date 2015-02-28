@@ -1,6 +1,6 @@
 package org.pebble.core.encoding.ints.datastructures;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,8 +60,7 @@ public class InvertedListIntReferenceListsIndex implements IntReferenceListsInde
     ) {
         setCandidates(list);
         int size;
-        IntList cloneList;
-        cloneList = new IntArrayList(list);
+        IntList cloneList = new IntArrayList(list);
         int minSize = 1 + outputOffset.getWriteIntervalsOffset(cloneList, valueBitSize);
         minSize += outputOffset.getWriteDeltaOffset(cloneList, valueBitSize);
         int bestReferenceIndex = -1;

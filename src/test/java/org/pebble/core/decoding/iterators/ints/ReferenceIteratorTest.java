@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,21 +16,22 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
-import it.unimi.dsi.io.InputBitStream;
-import org.pebble.UnitTest;
-import org.pebble.core.encoding.DefaultParametersValues;
-import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.io.InputBitStream;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
+import org.pebble.core.decoding.iterators.Helper;
+import org.pebble.core.encoding.DefaultParametersValues;
+import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
 
 import java.io.IOException;
 
-import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
+import static org.pebble.core.decoding.iterators.Helper.getInput;
 
 @Category(UnitTest.class)
 public class ReferenceIteratorTest {
@@ -53,7 +54,7 @@ public class ReferenceIteratorTest {
                 DefaultParametersValues.INT_BITS,
                 DefaultParametersValues.DEFAULT_MIN_INTERVAL_SIZE,
                 input.stream,
-                new BytesArrayPebbleBytesStore(input.buffer, new long[] {0l, 0l})
+                new BytesArrayPebbleBytesStore(input.buffer, new long[] {0L, 0L})
             ) {
                 @Override
                 public IntIterator getReferenceListIterator(

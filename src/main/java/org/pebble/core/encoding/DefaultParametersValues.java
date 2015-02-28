@@ -1,6 +1,6 @@
 package org.pebble.core.encoding;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,12 @@ public class DefaultParametersValues {
     /**
      * Default number of bits to store an integer.
      */
-    public static final int INT_BITS = 32;
+    public static final int INT_BITS = 31;
+
+    /**
+     * Default number of bits to store a long integer.
+     */
+    public static final int LONG_BITS = 63;
 
     /**
      * Min interval size to be encoded as interval.

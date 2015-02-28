@@ -1,6 +1,6 @@
 package org.pebble.core.encoding;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,16 +16,14 @@ package org.pebble.core.encoding;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
-import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.longs.LongArrayList;
+import it.unimi.dsi.fastutil.longs.LongList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.mockito.Matchers;
+import org.pebble.UnitTest;
+import org.pebble.core.encoding.longs.datastructures.LongReferenceListsStore;
 
-import static org.pebble.core.encoding.Helper.getOutput;
-import static org.pebble.core.encoding.Helper.toBinaryString;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -33,9 +31,11 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.pebble.core.encoding.Helper.getOutput;
+import static org.pebble.core.encoding.Helper.toBinaryString;
 
 @Category(UnitTest.class)
-public class OutputSuccinctStreamWriteReferenceTest {
+public class LongsOutputSuccinctStreamWriteReferenceTest {
 
     @Test
     public void whenMissingReferenceListItShouldWriteItsSuccinctRepresentationAndListToStoreSuccessfully()
@@ -43,8 +43,8 @@ public class OutputSuccinctStreamWriteReferenceTest {
     {
         final int valueBitSize = 1;
         final int listIndex = 12;
-        final IntList list = new IntArrayList(new int[] {1, 2, 3, 5, 6, 7, 10, 11, 16, 19});
-        final IntReferenceListsStore referenceListsStore = mock(IntReferenceListsStore.class);
+        final LongList list = new LongArrayList(new long[] {1L, 2L, 3L, 5L, 6L, 7L, 10L, 11L, 16L, 19L});
+        final LongReferenceListsStore referenceListsStore = mock(LongReferenceListsStore.class);
         doReturn(null).when(referenceListsStore).get(list, valueBitSize, listIndex);
         final String expectedOutput = "1".replace(" ", "");
         final int expectedOffset = 1;
@@ -56,9 +56,9 @@ public class OutputSuccinctStreamWriteReferenceTest {
 
         assertEquals(expectedOutput, toBinaryString(out.buffer, offset));
         assertEquals(expectedOffset, offset);
-        verify(referenceListsStore, never()).remove(Matchers.<IntReferenceListsStore.ReferenceList>any());
+        verify(referenceListsStore, never()).remove(Matchers.<LongReferenceListsStore.ReferenceList>any());
         verify(referenceListsStore, times(1)).add(listIndex, 0, list);
-        verify(outStreamSpy, never()).writeDifference(Matchers.<IntList>any(), Matchers.<IntList>any());
+        verify(outStreamSpy, never()).writeDifference(Matchers.<LongList>any(), Matchers.<LongList>any());
     }
 
     @Test
@@ -67,13 +67,13 @@ public class OutputSuccinctStreamWriteReferenceTest {
     {
         final int valueBitSize = 1;
         final int listIndex = 12;
-        final IntList list = new IntArrayList(new int[] {1, 2, 3, 5, 6, 7, 10, 11, 16, 19});
-        final IntList referenceList = new IntArrayList(new int[] {1, 2, 3, 5, 6, 7, 10, 11, 16, 19});
-        IntReferenceListsStore.ReferenceList storeReferenceList = mock(IntReferenceListsStore.ReferenceList.class);
+        final LongList list = new LongArrayList(new long[] {1L, 2L, 3L, 5L, 6L, 7L, 10L, 11L, 16L, 19L});
+        final LongList referenceList = new LongArrayList(new long[] {1L, 2L, 3L, 5L, 6L, 7L, 10L, 11L, 16L, 19L});
+        LongReferenceListsStore.ReferenceList storeReferenceList = mock(LongReferenceListsStore.ReferenceList.class);
         doReturn(referenceList).when(storeReferenceList).getList();
         doReturn(10).when(storeReferenceList).getOffset();
         doReturn(1).when(storeReferenceList).getRecursiveReferences();
-        final IntReferenceListsStore referenceListsStore = mock(IntReferenceListsStore.class);
+        final LongReferenceListsStore referenceListsStore = mock(LongReferenceListsStore.class);
         doReturn(storeReferenceList).when(referenceListsStore).get(list, valueBitSize, listIndex);
         final Helper.Output out = getOutput();
         final OutputSuccinctStream outStreamSpy = spy(out.stream);
@@ -98,13 +98,13 @@ public class OutputSuccinctStreamWriteReferenceTest {
     {
         final int valueBitSize = 1;
         final int listIndex = 12;
-        final IntList list = new IntArrayList(new int[] {1, 2, 3, 5, 6, 7, 10, 11, 16, 19});
-        final IntList referenceList = new IntArrayList(new int[] {1, 2, 3, 5, 7, 10, 11, 16, 19});
-        IntReferenceListsStore.ReferenceList storeReferenceList = mock(IntReferenceListsStore.ReferenceList.class);
+        final LongList list = new LongArrayList(new long[] {1L, 2L, 3L, 5L, 6L, 7L, 10L, 11L, 16L, 19L});
+        final LongList referenceList = new LongArrayList(new long[] {1L, 2L, 3L, 5L, 7L, 10L, 11L, 16L, 19L});
+        LongReferenceListsStore.ReferenceList storeReferenceList = mock(LongReferenceListsStore.ReferenceList.class);
         doReturn(referenceList).when(storeReferenceList).getList();
         doReturn(10).when(storeReferenceList).getOffset();
         doReturn(1).when(storeReferenceList).getRecursiveReferences();
-        final IntReferenceListsStore referenceListsStore = mock(IntReferenceListsStore.class);
+        final LongReferenceListsStore referenceListsStore = mock(LongReferenceListsStore.class);
         doReturn(storeReferenceList).when(referenceListsStore).get(list, valueBitSize, listIndex);
         final Helper.Output out = getOutput();
         final OutputSuccinctStream outStreamSpy = spy(out.stream);

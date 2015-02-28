@@ -1,6 +1,6 @@
 package org.pebble.core.encoding.ints.datastructures;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,16 +16,16 @@ package org.pebble.core.encoding.ints.datastructures;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
 
 import static junit.framework.TestCase.assertEquals;
 
 @Category(UnitTest.class)
-public class InvertedListIntReferenceListsIndexgetIndexOfReferenceListTest {
+public class InvertedListIntReferenceListsIndexGetIndexOfReferenceListTest {
 
     @Test
     public void whenFindingListThatGeneratesSmallerCompressionThanPreviousOneItShouldReturnItsIndex() {

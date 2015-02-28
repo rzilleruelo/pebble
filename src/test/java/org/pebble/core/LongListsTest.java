@@ -1,6 +1,6 @@
 package org.pebble.core;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,32 +16,31 @@ package org.pebble.core;
  *  limitations under the License.
  */
 
-import org.pebble.FastIntegrationTest;
-import org.pebble.core.decoding.PebbleBytesStore;
-import org.pebble.core.encoding.OutputSuccinctStream;
-import org.pebble.core.encoding.ints.datastructures.IntReferenceListsIndex;
-import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
-import org.pebble.core.encoding.ints.datastructures.InvertedListIntReferenceListsIndex;
-import org.pebble.core.encoding.Helper;
-import org.pebble.core.decoding.iterators.ints.Helper.Input;
-import org.pebble.core.decoding.iterators.ints.ListIterator;
-import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntIterator;
-import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.longs.LongArrayList;
+import it.unimi.dsi.fastutil.longs.LongIterator;
+import it.unimi.dsi.fastutil.longs.LongList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.FastIntegrationTest;
+import org.pebble.core.decoding.PebbleBytesStore;
+import org.pebble.core.decoding.iterators.Helper.Input;
+import org.pebble.core.decoding.iterators.longs.ListIterator;
+import org.pebble.core.encoding.Helper;
+import org.pebble.core.encoding.OutputSuccinctStream;
+import org.pebble.core.encoding.longs.datastructures.InvertedListLongReferenceListsIndex;
+import org.pebble.core.encoding.longs.datastructures.LongReferenceListsIndex;
+import org.pebble.core.encoding.longs.datastructures.LongReferenceListsStore;
+import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
 
 import java.io.IOException;
 
-import static org.pebble.core.encoding.ints.datastructures.Helper.translateToUtilsCollection;
+import static junit.framework.TestCase.assertEquals;
+import static org.pebble.core.decoding.iterators.Helper.getInput;
 import static org.pebble.core.encoding.Helper.getOutput;
 import static org.pebble.core.encoding.Helper.toBinaryString;
-import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
-import static junit.framework.TestCase.assertEquals;
 
 @Category(FastIntegrationTest.class)
-public class ListsTest {
+public class LongListsTest {
 
     @Test
     public void itShouldCompressLists() throws IOException {
@@ -50,17 +49,17 @@ public class ListsTest {
         final int minListSize = 3;
         final int valueBitSize = 5;
         final Helper.Output out = getOutput();
-        final IntReferenceListsIndex referenceListsIndex = new InvertedListIntReferenceListsIndex();
-        final IntReferenceListsStore referenceListsStore = new IntReferenceListsStore(
+        final LongReferenceListsIndex referenceListsIndex = new InvertedListLongReferenceListsIndex();
+        final LongReferenceListsStore referenceListsStore = new LongReferenceListsStore(
             storeSize,
             maxRecursiveReferences,
             minListSize,
             referenceListsIndex
         );
         final OutputSuccinctStream outputSuccinctStream = new OutputSuccinctStream(out.buffer);
-        final IntList[] lists = new IntList[] {
-            new IntArrayList(new int[] {12, 8, 5, 12, 13, 5, 13, 8}),
-            new IntArrayList(new int[] {13, 13, 5, 8, 5, 8, 12, 13, 12, 12})
+        final LongList[] lists = new LongList[] {
+            new LongArrayList(new long[] {12L, 8L, 5L, 12L, 13L, 5L, 13L, 8L}),
+            new LongArrayList(new long[] {13L, 13L, 5L, 8L, 5L, 8L, 12L, 13L, 12L, 12L})
         };
         /**
          * list=[12, 8, 5, 12, 13, 5, 13, 8, 5, 12, 8]
@@ -101,26 +100,29 @@ public class ListsTest {
             "1 1 01101 00101 0101 01100 1 01101 01101 0100 0100 01101 0101 01110 01111 01100" +
             "0100 1 1 1 1 01111 01111 1 01110 0101 0100 0101 0101 0101 0100 1"
         );
-        final long[] offsets = new long[] {0l, 64l};
+        final long[] offsets = new long[] {0L, 64L};
         final PebbleBytesStore bytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsets);
         final int valueBitSize = 5;
-        final IntList[] expectedLists = new IntList[] {
-            new IntArrayList(new int[] {12, 8, 5, 12, 13, 5, 13, 8}),
-            new IntArrayList(new int[] {13, 13, 5, 8, 5, 8, 12, 13, 12, 12})
+        final LongList[] expectedLists = new LongList[] {
+            new LongArrayList(new long[] {12L, 8L, 5L, 12L, 13L, 5L, 13L, 8L}),
+            new LongArrayList(new long[] {13L, 13L, 5L, 8L, 5L, 8L, 12L, 13L, 12L, 12L})
         };
-        final IntList[] lists = new IntList[expectedLists.length];
-        IntList list;
-        IntIterator iterator;
+        final LongList[] lists = new LongList[expectedLists.length];
+        LongList list;
+        LongIterator iterator;
 
         for(int i = 0; i < lists.length; i++) {
             iterator = ListIterator.build(i, valueBitSize, bytesStore);
-            lists[i] = list = new IntArrayList();
+            lists[i] = list = new LongArrayList();
             while(iterator.hasNext()) {
-                list.add(iterator.nextInt());
+                list.add(iterator.nextLong());
             }
         }
 
-        assertEquals(translateToUtilsCollection(expectedLists), translateToUtilsCollection(lists));
+        assertEquals(
+            Helper.<Long, LongList>translateToUtilsCollection(expectedLists),
+            Helper.<Long, LongList>translateToUtilsCollection(lists)
+        );
     }
 
 }

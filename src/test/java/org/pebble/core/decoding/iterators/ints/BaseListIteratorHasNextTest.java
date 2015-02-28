@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,16 +16,17 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.pebble.UnitTest;
+import org.pebble.core.decoding.iterators.Helper;
 
 import java.io.IOException;
 
-import static org.pebble.core.decoding.iterators.ints.BaseListIteratorHelper.BaseListIteratorBuilder;
-import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.pebble.core.decoding.iterators.Helper.getInput;
+import static org.pebble.core.decoding.iterators.ints.BaseListIteratorHelper.BaseListIteratorBuilder;
 
 @Category(UnitTest.class)
 public class BaseListIteratorHasNextTest {
@@ -80,8 +81,8 @@ public class BaseListIteratorHasNextTest {
     @Test
     public void whenOnlyDeltaListHaveElementsHasNextShouldReturnTrue() throws IOException {
         final Helper.Input input = getInput(
-            "1" + // Empty Reference list
-            "1" + // Empty intervals list
+            "1" +                                   // Empty Reference list
+            "1" +                                   // Empty intervals list
             "0100 00000000000000000000000000001001" // Delta list [9]
         );
         final int listIndex = 1;

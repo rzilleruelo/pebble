@@ -1,6 +1,6 @@
 package org.pebble.core.decoding.iterators.ints;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +16,14 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
-import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
-import org.pebble.core.decoding.PebbleBytesStore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
+import org.pebble.UnitTest;
+import org.pebble.core.decoding.PebbleBytesStore;
+import org.pebble.core.decoding.iterators.Helper;
+import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
 
 import java.io.IOException;
 
@@ -94,7 +95,7 @@ public class IncrementalListIteratorTest {
     private static IncrementalListIterator buildIncrementalIterator(final Helper.Input input) throws IOException {
         final int valueBitSize = 2;
         final int listIndex = 0;
-        final long[] offsets = new long[] {0l};
+        final long[] offsets = new long[] {0L};
         final PebbleBytesStore bytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsets);
         return IncrementalListIterator.build(listIndex, valueBitSize, bytesStore);
     }

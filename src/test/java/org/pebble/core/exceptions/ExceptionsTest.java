@@ -1,6 +1,6 @@
 package org.pebble.core.exceptions;
 
-/*
+/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +16,11 @@ package org.pebble.core.exceptions;
  *  limitations under the License.
  */
 
-import org.pebble.UnitTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
+import org.pebble.UnitTest;
 
 @Category(UnitTest.class)
 public class ExceptionsTest {
@@ -41,7 +41,7 @@ public class ExceptionsTest {
         expectedException.expect(DeltaValueIsTooBigException.class);
         expectedException.expectMessage("Delta value between 2147483648 and 0, is too big");
 
-        throw new DeltaValueIsTooBigException(0, 2147483648l);
+        throw new DeltaValueIsTooBigException(0, 2147483648L);
     }
 
 }
