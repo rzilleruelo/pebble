@@ -19,13 +19,13 @@ package org.pebble.utils.decoding;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.UnitTest;
-import org.pebble.core.decoding.iterators.small.Helper;
+import org.pebble.core.decoding.iterators.ints.Helper;
 
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.pebble.core.decoding.iterators.small.Helper.getInput;
+import static org.pebble.core.decoding.iterators.ints.Helper.getInput;
 
 @Category(UnitTest.class)
 public class BytesArrayPebbleBytesStoreTest {

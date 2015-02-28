@@ -17,7 +17,7 @@ package org.pebble.core.encoding;
  */
 
 import org.pebble.UnitTest;
-import org.pebble.core.encoding.small.datastructures.IntReferenceListsStore;
+import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
