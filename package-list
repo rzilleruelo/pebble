@@ -1,9 +1,13 @@
 org.pebble.core
 org.pebble.core.decoding
 org.pebble.core.decoding.iterators.ints
+org.pebble.core.decoding.iterators.longs
 org.pebble.core.encoding
+org.pebble.core.encoding.commons
 org.pebble.core.encoding.ints
 org.pebble.core.encoding.ints.datastructures
+org.pebble.core.encoding.longs
+org.pebble.core.encoding.longs.datastructures
 org.pebble.core.exceptions
 org.pebble.utils
 org.pebble.utils.decoding
