@@ -1,5 +1,3 @@
-package org.pebble.core.decoding.iterators.longs;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,9 +14,11 @@ package org.pebble.core.decoding.iterators.longs;
  *  limitations under the License.
  */
 
+package org.pebble.core.decoding.iterators.longs;
+
 import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.io.InputBitStream;
-import org.pebble.core.decoding.PebbleBytesStore;
+import org.pebble.core.PebbleBytesStore;
 
 import java.io.IOException;
 
@@ -128,7 +128,7 @@ abstract class BaseListIterator implements LongIterator {
      */
     @Override
     public Long next() {
-        long value = nextLong();
+        final long value = nextLong();
         return value == -1L ? null : value;
     }
 

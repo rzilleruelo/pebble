@@ -1,5 +1,3 @@
-package org.pebble.core.decoding.iterators.ints;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,6 +14,8 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
+package org.pebble.core.decoding.iterators.ints;
+
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.fastutil.ints.IntList;
@@ -23,9 +23,11 @@ import it.unimi.dsi.io.InputBitStream;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.UnitTest;
+import org.pebble.core.PebbleOffsetsStore;
 import org.pebble.core.decoding.iterators.Helper;
 import org.pebble.core.encoding.DefaultParametersValues;
-import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
+import org.pebble.utils.BytesArrayPebbleBytesStore;
+import org.pebble.utils.LongListPebbleOffsetsStore;
 
 import java.io.IOException;
 
@@ -49,12 +51,13 @@ public class ReferenceIteratorTest {
         }
 
         public ReferenceIterator build() throws IOException {
+            final PebbleOffsetsStore offsetsStore = new LongListPebbleOffsetsStore(new long[] {0L, 0L});
             return new ReferenceIterator(
                 listIndex,
                 DefaultParametersValues.INT_BITS,
                 DefaultParametersValues.DEFAULT_MIN_INTERVAL_SIZE,
                 input.stream,
-                new BytesArrayPebbleBytesStore(input.buffer, new long[] {0L, 0L})
+                new BytesArrayPebbleBytesStore(input.buffer, offsetsStore)
             ) {
                 @Override
                 public IntIterator getReferenceListIterator(

@@ -1,9 +1,4 @@
 /**
- * Provides Pebble's core algorithm implementation.
- */
-package org.pebble.core;
-
-/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,3 +13,8 @@ package org.pebble.core;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+/**
+ * Provides Pebble's core algorithm implementation.
+ */
+package org.pebble.core;

@@ -30,10 +30,10 @@ mvn assembly:single
 ```
 This could take around 5 minutes.
 
-Pebble API Description
-----------------------
-The current implementation supports the compression and decompression of lists of positive integer. These lists
-can be of three types: **strictly incremental lists**, **incremental lists** and **unsorted lists**. For details
+Pebble Core API Description
+---------------------------
+The current implementation supports the compression and decompression of lists of positive integers and longs. These
+lists can be of three types: **strictly incremental lists**, **incremental lists** and **unsorted lists**. For details
 regarding the library api, refer to the
 [Api Documentation](//groupon.github.io/pebble/index.html).
 On following sections the basics around encoding and decoding lists is explained.
@@ -168,15 +168,3 @@ while (iterator.hasNext()) {
     System.out.println(iterator.nextInt());
 }
 ```
-
-TODO
-----
-* Add support for lists of `long` type.
-* Add support for storing more than integer values, such as: uuids, timestamps, finite text, free text and real numbers.
-* Explore the usage of [Trove](http://trove.starlight-systems.com/) library instead of
-  [FastUtils WebGraph](http://fastutil.di.unimi.it/) library.
-* Add support for storing complex data types. Data that is build on top primitive data types.
-* Implement java.util.Map interface.
-* Explore hbase memory cache.
-* Explore hadoop files storage application.
-* Use same compressed list as the reference list buffer. This will be helpful as well, to update the store on real time.

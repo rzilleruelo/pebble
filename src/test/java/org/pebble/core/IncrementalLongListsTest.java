@@ -1,5 +1,3 @@
-package org.pebble.core;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,13 +14,14 @@ package org.pebble.core;
  *  limitations under the License.
  */
 
+package org.pebble.core;
+
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.longs.LongList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.FastIntegrationTest;
-import org.pebble.core.decoding.PebbleBytesStore;
 import org.pebble.core.decoding.iterators.Helper.Input;
 import org.pebble.core.decoding.iterators.longs.IncrementalListIterator;
 import org.pebble.core.encoding.Helper;
@@ -30,7 +29,8 @@ import org.pebble.core.encoding.OutputSuccinctStream;
 import org.pebble.core.encoding.longs.datastructures.InvertedListLongReferenceListsIndex;
 import org.pebble.core.encoding.longs.datastructures.LongReferenceListsIndex;
 import org.pebble.core.encoding.longs.datastructures.LongReferenceListsStore;
-import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
+import org.pebble.utils.BytesArrayPebbleBytesStore;
+import org.pebble.utils.LongListPebbleOffsetsStore;
 
 import java.io.IOException;
 
@@ -98,8 +98,8 @@ public class IncrementalLongListsTest {
             "1 1 1 01101 00101 0101 01100 1" +
             "0101 1 0100 0100 01100 0100 1 1 1 1"
         );
-        final long[] offsets = new long[] {0L, 23L};
-        final PebbleBytesStore bytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsets);
+        final PebbleOffsetsStore offsetsStore = new LongListPebbleOffsetsStore(new long[] {0L, 23L});
+        final PebbleBytesStore bytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsetsStore);
         final int valueBitSize = 5;
         final LongList[] expectedLists = new LongList[] {
             new LongArrayList(new long[] {5L, 8L, 12L, 13L}),

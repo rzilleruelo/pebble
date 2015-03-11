@@ -1,5 +1,3 @@
-package org.pebble.core.encoding.ints;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -15,6 +13,8 @@ package org.pebble.core.encoding.ints;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+package org.pebble.core.encoding.ints;
 
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.fastutil.ints.IntList;
@@ -237,15 +237,15 @@ public class IntOutputOffset extends OutputOffset {
         if (x < DELTA_OFFSET_X.length) {
             return DELTA_OFFSET_X[x];
         }
-        int log2x = lower_bound_log2(x + 1);
-        return log2x + 2 * lower_bound_log2(log2x + 1) + 1;
+        final int log2x = lowerBoundLog2(x + 1);
+        return log2x + 2 * lowerBoundLog2(log2x + 1) + 1;
     }
 
     private static int writeIntOffset(final int x, final int valueBitSize) {
         return valueBitSize;
     }
 
-    private static int lower_bound_log2(int x) {
+    private static int lowerBoundLog2(final int x) {
         return DefaultParametersValues.INT_BITS - Integer.numberOfLeadingZeros(x);
     }
 

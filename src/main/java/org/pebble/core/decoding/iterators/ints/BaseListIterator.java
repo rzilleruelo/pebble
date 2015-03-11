@@ -1,5 +1,3 @@
-package org.pebble.core.decoding.iterators.ints;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,9 +14,11 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
+package org.pebble.core.decoding.iterators.ints;
+
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.io.InputBitStream;
-import org.pebble.core.decoding.PebbleBytesStore;
+import org.pebble.core.PebbleBytesStore;
 
 import java.io.IOException;
 
@@ -128,7 +128,7 @@ abstract class BaseListIterator implements IntIterator {
      */
     @Override
     public Integer next() {
-        int value = nextInt();
+        final int value = nextInt();
         return value == -1 ? null : value;
     }
 
