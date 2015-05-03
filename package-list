@@ -9,5 +9,8 @@ org.pebble.core.encoding.ints.datastructures
 org.pebble.core.encoding.longs
 org.pebble.core.encoding.longs.datastructures
 org.pebble.core.exceptions
+org.pebble.types
+org.pebble.types.text
+org.pebble.types.timestamp
+org.pebble.types.uuid
 org.pebble.utils
-org.pebble.utils.decoding
