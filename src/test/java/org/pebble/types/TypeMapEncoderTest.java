@@ -16,12 +16,12 @@
 
 package org.pebble.types;
 
-import it.unimi.dsi.io.OutputBitStream;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.UnitTest;
 import org.pebble.core.PebbleOffsetsStoreWriter;
 import org.pebble.core.encoding.EncodingInfo;
+import org.pebble.core.encoding.OutputBitStream;
 import org.pebble.utils.LongListPebbleOffsetsStore;
 
 import java.io.IOException;

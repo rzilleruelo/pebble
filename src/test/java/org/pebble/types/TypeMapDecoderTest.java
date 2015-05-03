@@ -16,12 +16,12 @@
 
 package org.pebble.types;
 
-import it.unimi.dsi.io.InputBitStream;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.UnitTest;
 import org.pebble.core.PebbleBytesStore;
 import org.pebble.core.PebbleOffsetsStore;
+import org.pebble.core.decoding.InputBitStream;
 import org.pebble.core.decoding.iterators.Helper;
 import org.pebble.utils.BytesArrayPebbleBytesStore;
 import org.pebble.utils.LongListPebbleOffsetsStore;

@@ -16,7 +16,7 @@ package org.pebble.core.decoding.iterators;
  *  limitations under the License.
  */
 
-import it.unimi.dsi.io.InputBitStream;
+import org.pebble.core.decoding.InputBitStream;
 
 import java.io.IOException;
 

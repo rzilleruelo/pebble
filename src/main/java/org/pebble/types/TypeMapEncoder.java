@@ -17,9 +17,9 @@
 package org.pebble.types;
 
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import it.unimi.dsi.io.OutputBitStream;
 import org.pebble.core.PebbleOffsetsStoreWriter;
 import org.pebble.core.encoding.EncodingInfo;
+import org.pebble.core.encoding.OutputBitStream;
 
 import java.io.IOException;
 

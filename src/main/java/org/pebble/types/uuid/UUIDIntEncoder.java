@@ -16,9 +16,9 @@
 
 package org.pebble.types.uuid;
 
-import it.unimi.dsi.io.OutputBitStream;
 import org.pebble.core.PebbleOffsetsStoreWriter;
 import org.pebble.core.encoding.EncodingInfo;
+import org.pebble.core.encoding.OutputBitStream;
 import org.pebble.types.TypeMapEncoder;
 
 import java.io.IOException;
@@ -55,8 +55,8 @@ public class UUIDIntEncoder extends TypeMapEncoder<UUID> {
      */
     @Override
     protected int write(final UUID element) throws IOException {
-        outputBitStream.writeLong(element.getMostSignificantBits(), 64);
-        outputBitStream.writeLong(element.getLeastSignificantBits(), 64);
+        outputBitStream.writeLong(element.getMostSignificantBits());
+        outputBitStream.writeLong(element.getLeastSignificantBits());
         return 128;
     }
 

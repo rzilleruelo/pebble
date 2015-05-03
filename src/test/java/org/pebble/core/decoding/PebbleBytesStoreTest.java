@@ -16,7 +16,6 @@
 
 package org.pebble.core.decoding;
 
-import it.unimi.dsi.io.InputBitStream;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.UnitTest;

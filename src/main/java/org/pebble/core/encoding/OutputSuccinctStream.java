@@ -1,5 +1,3 @@
-package org.pebble.core.encoding;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,6 +14,8 @@ package org.pebble.core.encoding;
  *  limitations under the License.
  */
 
+package org.pebble.core.encoding;
+
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntRBTreeMap;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
@@ -30,7 +30,6 @@ import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.longs.LongList;
 import it.unimi.dsi.fastutil.longs.LongRBTreeSet;
 import it.unimi.dsi.fastutil.longs.LongSortedSet;
-import it.unimi.dsi.io.OutputBitStream;
 import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
 import org.pebble.core.encoding.longs.datastructures.LongReferenceListsStore;
 import org.pebble.core.exceptions.DeltaValueIsTooBigException;
@@ -51,10 +50,10 @@ public class OutputSuccinctStream extends OutputBitStream {
 
     /**
      * Initialize a stream that will write into the bytes array <code>a</code>.
-     * @param a output of the stream.
+     * @param buffer output of the stream.
      */
-    public OutputSuccinctStream(final byte[] a) {
-        super(a);
+    public OutputSuccinctStream(final byte[] buffer) {
+        super(buffer);
         minIntervalSize = DefaultParametersValues.DEFAULT_MIN_INTERVAL_SIZE;
         repeatsBuffer = new IntArrayList();
         blocksBuffer = new IntArrayList();

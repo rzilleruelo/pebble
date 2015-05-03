@@ -1,5 +1,3 @@
-package org.pebble.utils;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -15,6 +13,8 @@ package org.pebble.utils;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+package org.pebble.utils;
 
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import it.unimi.dsi.fastutil.longs.LongList;

@@ -1,5 +1,3 @@
-package org.pebble.core.decoding.iterators.longs;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,7 +14,9 @@ package org.pebble.core.decoding.iterators.longs;
  *  limitations under the License.
  */
 
-import it.unimi.dsi.io.InputBitStream;
+package org.pebble.core.decoding.iterators.longs;
+
+import org.pebble.core.decoding.InputBitStream;
 
 import java.io.IOException;
 

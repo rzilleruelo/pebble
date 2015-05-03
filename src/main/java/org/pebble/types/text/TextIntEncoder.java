@@ -16,9 +16,9 @@
 
 package org.pebble.types.text;
 
-import it.unimi.dsi.io.OutputBitStream;
 import org.pebble.core.PebbleOffsetsStoreWriter;
 import org.pebble.core.encoding.EncodingInfo;
+import org.pebble.core.encoding.OutputBitStream;
 import org.pebble.types.TypeMapEncoder;
 
 import java.io.IOException;

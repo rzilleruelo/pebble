@@ -17,8 +17,8 @@
 package org.pebble.types;
 
 import it.unimi.dsi.fastutil.ints.IntIterator;
-import it.unimi.dsi.io.InputBitStream;
 import org.pebble.core.PebbleBytesStore;
+import org.pebble.core.decoding.InputBitStream;
 import org.pebble.core.decoding.iterators.ints.ListIterator;
 
 import java.io.IOException;
@@ -71,7 +71,7 @@ public abstract class TypeMapDecoder<T> extends TypeIntDecoder<T> {
         /**
          * Decodes current element by using the index list stored in current element value, positions the cursor
          * where the encoding starts for the encoded element and decode its value by calling
-         * {@link org.pebble.types.TypeMapDecoder#read(it.unimi.dsi.io.InputBitStream)}.
+         * {@link org.pebble.types.TypeMapDecoder#read(org.pebble.core.decoding.InputBitStream)}.
          * @return current decoded element.
          * @throws java.lang.IllegalStateException in case there is an exception reading encoded element.
          */
