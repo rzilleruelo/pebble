@@ -1,5 +1,3 @@
-package org.pebble.utils.decoding;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,9 +14,12 @@ package org.pebble.utils.decoding;
  *  limitations under the License.
  */
 
+package org.pebble.utils;
+
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.UnitTest;
+import org.pebble.core.PebbleOffsetsStore;
 import org.pebble.core.decoding.iterators.Helper;
 
 import java.io.IOException;
@@ -36,8 +37,8 @@ public class BytesArrayPebbleBytesStoreTest {
             "1 1 01101 00101 0101 01100 1 01101 01101 0100 0100 01101 0101 01110 01111 01100" +
             "0100 1 1 1 1 01111 01111 1 01110 0101 0100 0101 0101 0101 0100 1"
         );
-        final long[] offsets = {0L, 64L};
-        final BytesArrayPebbleBytesStore pebbleBytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsets);
+        final PebbleOffsetsStore offsetsStore = new LongListPebbleOffsetsStore(new long[] {0L, 64L});
+        final BytesArrayPebbleBytesStore pebbleBytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsetsStore);
 
         assertSame(pebbleBytesStore.get(0), input.buffer);
     }
@@ -48,8 +49,8 @@ public class BytesArrayPebbleBytesStoreTest {
             "1 1 01101 00101 0101 01100 1 01101 01101 0100 0100 01101 0101 01110 01111 01100" +
             "0100 1 1 1 1 01111 01111 1 01110 0101 0100 0101 0101 0101 0100 1"
         );
-        final long[] offsets = {0L, 64L};
-        final BytesArrayPebbleBytesStore pebbleBytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsets);
+        final PebbleOffsetsStore offsetsStore = new LongListPebbleOffsetsStore(new long[] {0L, 64L});
+        final BytesArrayPebbleBytesStore pebbleBytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsetsStore);
 
         assertEquals(64L, pebbleBytesStore.offset(1));
     }

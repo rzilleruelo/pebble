@@ -1,9 +1,4 @@
 /**
- * Contains utility classes which extends Pebble's core compression functionality.
- */
-package org.pebble.utils.decoding;
-
-/**
  *  Copyright 2015 Groupon
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,3 +13,8 @@ package org.pebble.utils.decoding;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+/**
+ * Provides Pebble's encoding and decoding Texts functionality.
+ */
+package org.pebble.types.text;

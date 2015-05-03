@@ -1,5 +1,3 @@
-package org.pebble.core.decoding.iterators.longs;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,10 +14,12 @@ package org.pebble.core.decoding.iterators.longs;
  *  limitations under the License.
  */
 
+package org.pebble.core.decoding.iterators.longs;
+
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import it.unimi.dsi.fastutil.longs.LongList;
 import it.unimi.dsi.io.InputBitStream;
-import org.pebble.core.decoding.PebbleBytesStore;
+import org.pebble.core.PebbleBytesStore;
 import org.pebble.core.encoding.DefaultParametersValues;
 
 import java.io.IOException;
@@ -66,9 +66,9 @@ public class ListIterator extends StrictlyIncrementalListIterator {
                 index = inputBitStream.readDelta();
                 if ((index & 1) == 0) {
                     lastIndex = index / 2 + lastIndex;
-                    return valuesMap.get(lastIndex);
+                } else {
+                    lastIndex = lastIndex - (index + 1) / 2;
                 }
-                lastIndex = lastIndex - (index + 1) / 2;
                 return valuesMap.get(lastIndex);
             }
         } catch (IOException e) {

@@ -1,5 +1,3 @@
-package org.pebble.core.decoding.iterators.ints;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,8 +14,10 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
+package org.pebble.core.decoding.iterators.ints;
+
 import it.unimi.dsi.io.InputBitStream;
-import org.pebble.core.decoding.PebbleBytesStore;
+import org.pebble.core.PebbleBytesStore;
 
 import java.io.IOException;
 
@@ -73,7 +73,7 @@ class IncrementalListUniqueIterator extends BaseListIterator {
         final InputBitStream inputBitStream,
         final PebbleBytesStore bytesStore
     ) throws IOException {
-        RepeatsIterator repeatsIterator = new RepeatsIterator(inputBitStream);
+        final RepeatsIterator repeatsIterator = new RepeatsIterator(inputBitStream);
         inputBitStream.skipDeltas(repeatsIterator.getRemainingElements() * 2);
         return new IncrementalListUniqueIterator(listIndex, valueBitSize, minIntervalSize, inputBitStream, bytesStore);
     }

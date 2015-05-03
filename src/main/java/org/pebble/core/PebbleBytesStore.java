@@ -1,5 +1,3 @@
-package org.pebble.core.decoding;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -15,6 +13,8 @@ package org.pebble.core.decoding;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+package org.pebble.core;
 
 import it.unimi.dsi.io.InputBitStream;
 
@@ -45,13 +45,13 @@ public abstract class PebbleBytesStore {
      * @param listIndex index of list.
      * @return byte array which contains the data of the compressed list associated with <code>listIndex</code>.
      */
-    protected abstract byte[] get(int listIndex);
+    protected abstract byte[] get(final int listIndex);
 
     /**
      * Gets the offset in bits where the compressed list associated with <code>listIndex</code> starts.
      * @param listIndex index of list.
      * @return the offset in bits where the compressed list associated with <code>listIndex</code> starts.
      */
-    protected abstract long offset(int listIndex);
+    protected abstract long offset(final int listIndex);
 
 }

@@ -1,5 +1,3 @@
-package org.pebble.core.decoding.iterators.ints;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,11 +14,14 @@ package org.pebble.core.decoding.iterators.ints;
  *  limitations under the License.
  */
 
+package org.pebble.core.decoding.iterators.ints;
+
 import it.unimi.dsi.io.InputBitStream;
-import org.pebble.core.decoding.PebbleBytesStore;
-import org.pebble.core.encoding.DefaultParametersValues;
+import org.pebble.core.PebbleBytesStore;
 
 import java.io.IOException;
+
+import static org.pebble.core.encoding.DefaultParametersValues.DEFAULT_MIN_INTERVAL_SIZE;
 
 /**
  * Iterator over a compressed incremental list of <code>int</code>s. See
@@ -85,12 +86,32 @@ public class IncrementalListIterator extends IncrementalListUniqueIterator {
         final PebbleBytesStore bytesStore
     ) throws IOException {
         final InputBitStream inputBitStream = bytesStore.getInputBitStream(listIndex);
-        RepeatsIterator repeatsIterator = new RepeatsIterator(inputBitStream);
+        return build(listIndex, valueBitSize, bytesStore, inputBitStream);
+    }
+
+    /**
+     * Instance builder.
+     * @param listIndex index of the current list.
+     * @param valueBitSize fixed number of bits used to represent value in list to be encoded. It can be any value
+     *                     between 1bit and 31 bits.
+     * @param bytesStore mapping between list offsets and data bytes arrays and bytes offsets.
+     * @param inputBitStream input bit stream used to read the compressed lists representations. The cursor must be
+     *                       positioned at the beginning of encoding.
+     * @return built instance.
+     * @throws IOException when there is an exception reading from <code>inputBitStream</code>.
+     */
+    public static IncrementalListIterator build(
+        final int listIndex,
+        final int valueBitSize,
+        final PebbleBytesStore bytesStore,
+        final InputBitStream inputBitStream
+    ) throws IOException {
+        final RepeatsIterator repeatsIterator = new RepeatsIterator(inputBitStream);
         inputBitStream.skipDeltas(repeatsIterator.getRemainingElements() * 2);
         return new IncrementalListIterator(
             listIndex,
             valueBitSize,
-            DefaultParametersValues.DEFAULT_MIN_INTERVAL_SIZE,
+            DEFAULT_MIN_INTERVAL_SIZE,
             inputBitStream,
             bytesStore,
             repeatsIterator

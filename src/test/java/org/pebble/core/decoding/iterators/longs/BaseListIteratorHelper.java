@@ -1,5 +1,3 @@
-package org.pebble.core.decoding.iterators.longs;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,10 +14,14 @@ package org.pebble.core.decoding.iterators.longs;
  *  limitations under the License.
  */
 
+package org.pebble.core.decoding.iterators.longs;
+
 import it.unimi.dsi.io.InputBitStream;
+import org.pebble.core.PebbleOffsetsStore;
 import org.pebble.core.decoding.iterators.Helper;
 import org.pebble.core.encoding.DefaultParametersValues;
-import org.pebble.utils.decoding.BytesArrayPebbleBytesStore;
+import org.pebble.utils.BytesArrayPebbleBytesStore;
+import org.pebble.utils.LongListPebbleOffsetsStore;
 
 import java.io.IOException;
 
@@ -44,12 +46,13 @@ public class BaseListIteratorHelper {
         }
 
         public BaseListIterator build() throws IOException {
+            final PebbleOffsetsStore offsetsStore = new LongListPebbleOffsetsStore(new long[] {0L});
             return new BaseListIterator(
                 listIndex,
                 DefaultParametersValues.LONG_BITS,
                 DefaultParametersValues.DEFAULT_MIN_INTERVAL_SIZE,
                 input.stream,
-                new BytesArrayPebbleBytesStore(input.buffer, new long[] {0L})
+                new BytesArrayPebbleBytesStore(input.buffer, offsetsStore)
             ) {
                 @Override
                 protected ReferenceIterator initializeReferenceIterator(int listIndex, InputBitStream inputBitStream)

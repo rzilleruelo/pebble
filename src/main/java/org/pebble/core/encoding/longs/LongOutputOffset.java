@@ -1,5 +1,3 @@
-package org.pebble.core.encoding.longs;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -15,6 +13,8 @@ package org.pebble.core.encoding.longs;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+package org.pebble.core.encoding.longs;
 
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.fastutil.longs.LongIterator;
@@ -238,15 +238,15 @@ public class LongOutputOffset extends OutputOffset {
         if (x < DELTA_OFFSET_X.length) {
             return DELTA_OFFSET_X[(int) x];
         }
-        long log2x = lower_bound_log2(x + 1);
-        return (int) (log2x + 2 * lower_bound_log2(log2x + 1) + 1);
+        final long log2x = lowerBoundLog2(x + 1);
+        return (int) (log2x + 2 * lowerBoundLog2(log2x + 1) + 1);
     }
 
     private static int writeLongOffset(final long x, final int valueBitSize) {
         return valueBitSize;
     }
 
-    private static long lower_bound_log2(long x) {
+    private static long lowerBoundLog2(final long x) {
         return DefaultParametersValues.LONG_BITS - Long.numberOfLeadingZeros(x);
     }
 

@@ -1,5 +1,3 @@
-package org.pebble.utils.decoding;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,10 +14,13 @@ package org.pebble.utils.decoding;
  *  limitations under the License.
  */
 
-import org.pebble.core.decoding.PebbleBytesStore;
+package org.pebble.utils;
+
+import org.pebble.core.PebbleBytesStore;
+import org.pebble.core.PebbleOffsetsStore;
 
 /**
- * Wrapper of a single byte array which implements the {@link org.pebble.core.decoding.PebbleBytesStore}
+ * Wrapper of a single byte array which implements the {@link org.pebble.core.PebbleBytesStore}
  * interface. This implementation loads into main memory the full compressed data stored at <code>store</code> byte
  * array. Given the maximum number of an array 2^31-1 in java, this implementation is limited to compressed data sets
  * that fit in a single array. Approximately not bigger than 1.9[Gb].
@@ -27,25 +28,25 @@ import org.pebble.core.decoding.PebbleBytesStore;
 public class BytesArrayPebbleBytesStore extends PebbleBytesStore {
 
     private final byte[] store;
-    private final long[] offsets;
+    private final PebbleOffsetsStore offsetsStore;
 
     /**
      * Initialize a pebble byte store containing the compressed lists stored on <code>store</code> and its respective
      * offsets contained at <code>offsets</code>.
      * @param store byte array containing the bits of the compressed lists.
-     * @param offsets offsets indicating the start in bits of each compressed list representation stored in
-     *                <code>store</code>.
+     * @param offsetsStore store containing the offsets indicating the start in bits of each compressed list
+     *                     representation stored in <code>store</code>.
      */
-    public BytesArrayPebbleBytesStore(byte[] store, long[] offsets) {
-       this.store = store;
-        this.offsets = offsets;
+    public BytesArrayPebbleBytesStore(final byte[] store, PebbleOffsetsStore offsetsStore) {
+        this.store = store;
+        this.offsetsStore = offsetsStore;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public byte[] get(int listIndex) {
+    public byte[] get(final int listIndex) {
         return store;
     }
 
@@ -53,7 +54,7 @@ public class BytesArrayPebbleBytesStore extends PebbleBytesStore {
      * {@inheritDoc}
      */
     @Override
-    public long offset(int listIndex) {
-        return this.offsets[listIndex];
+    public long offset(final int listIndex) {
+        return offsetsStore.get(listIndex);
     }
 }

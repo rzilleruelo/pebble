@@ -1,5 +1,3 @@
-package org.pebble.core.encoding.ints.datastructures;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -15,6 +13,8 @@ package org.pebble.core.encoding.ints.datastructures;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+package org.pebble.core.encoding.ints.datastructures;
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
@@ -37,7 +37,7 @@ public class IntReferenceListsStore {
      * Initializes a <code>IntReferenceListsStore</code> capable to store at most <code>size</code> lists with no more
      * than <code>maxRecursiveReferences</code> recursive references. If the number of lists exceeds <code>size</code>,
      * it will overwrite the oldest list on the store.
-     * @param size maximum numbers of lists to be stored.
+     * @param size maximum number of lists to be stored.
      * @param maxRecursiveReferences maximum number of allowed recursive references.
      * @param minListSize Minimum size of list required to be added to the store.
      * @param referenceListIndex index used to find the best reference list candidate.
@@ -46,7 +46,7 @@ public class IntReferenceListsStore {
         final int size,
         final int maxRecursiveReferences,
         final int minListSize,
-        IntReferenceListsIndex referenceListIndex
+        final IntReferenceListsIndex referenceListIndex
     ) {
         index = 0;
         this.maxRecursiveReferences = maxRecursiveReferences;
@@ -63,7 +63,7 @@ public class IntReferenceListsStore {
      *
      * @param offset position of the <code>list</code> respect to the list of lists, starting from zero.
      * @param recursiveReferences number of recursive reference of the <code>list</code>.
-     * @param list to add to the store.
+     * @param list to append to the store.
      * @return true when the <code>list</code> is added to the store and false when is not.
      */
     public boolean add(final int offset, final int recursiveReferences, final IntList list) {
@@ -85,7 +85,7 @@ public class IntReferenceListsStore {
      * Removes from the store the given <code>list</code>.
      * @param list List to be removed from the store.
      */
-    public void remove(ReferenceList list) {
+    public void remove(final ReferenceList list) {
         referenceListIndex.removeListFromListsInvertedIndex(list.index, list.list);
         lists[list.index] = null;
     }
@@ -123,7 +123,7 @@ public class IntReferenceListsStore {
         private final int recursiveReferences;
         private final int index;
 
-        private ReferenceList(IntList list, int offset, int recursiveReferences, int index) {
+        private ReferenceList(final IntList list, final int offset, final int recursiveReferences, final int index) {
             this.index = index;
             this.list = list;
             this.offset = offset;

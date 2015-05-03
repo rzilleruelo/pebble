@@ -1,5 +1,3 @@
-package org.pebble.core.decoding;
-
 /**
  *  Copyright 2015 Groupon
  *
@@ -16,10 +14,13 @@ package org.pebble.core.decoding;
  *  limitations under the License.
  */
 
+package org.pebble.core.decoding;
+
 import it.unimi.dsi.io.InputBitStream;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.UnitTest;
+import org.pebble.core.PebbleBytesStore;
 import org.pebble.core.decoding.iterators.Helper.Input;
 
 import static org.junit.Assert.assertEquals;
