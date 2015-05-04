@@ -16,7 +16,6 @@
 
 package org.pebble.types.text;
 
-import it.unimi.dsi.io.OutputBitStream;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -25,6 +24,7 @@ import org.pebble.UnitTest;
 import org.pebble.core.PebbleOffsetsStoreWriter;
 import org.pebble.core.encoding.EncodingInfo;
 import org.pebble.core.encoding.Helper;
+import org.pebble.core.encoding.OutputBitStream;
 import org.pebble.utils.LongListPebbleOffsetsStore;
 
 import java.io.IOException;
@@ -65,13 +65,16 @@ public class TextIntEncoderTest {
         final int expectedTotalOffset = 64;
 
         final int totalOffset = encoder.write(value);
+        outputBitStream.close();
 
         assertEquals(expectedOutput, toBinaryString(out.buffer, totalOffset));
         assertEquals(expectedTotalOffset, totalOffset);
     }
 
     @Test
-    public void x() throws IOException {
+    public void encodeItShouldThrowIllegalArgumentExceptionExceptionWhenEncodingTextBiggerThanMaxLength()
+        throws IOException
+    {
         final EncodingInfo encodingInfo = new EncodingInfo();
         final int referenceWindowSize = 2;
         final Helper.Output out = getOutput();

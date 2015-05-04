@@ -16,8 +16,8 @@
 
 package org.pebble.types.uuid;
 
-import it.unimi.dsi.io.InputBitStream;
 import org.pebble.core.PebbleBytesStore;
+import org.pebble.core.decoding.InputBitStream;
 import org.pebble.types.TypeMapDecoder;
 
 import java.io.IOException;

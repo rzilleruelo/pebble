@@ -16,13 +16,13 @@
 
 package org.pebble.types.uuid;
 
-import it.unimi.dsi.io.OutputBitStream;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.UnitTest;
 import org.pebble.core.PebbleOffsetsStoreWriter;
 import org.pebble.core.encoding.EncodingInfo;
 import org.pebble.core.encoding.Helper;
+import org.pebble.core.encoding.OutputBitStream;
 import org.pebble.utils.LongListPebbleOffsetsStore;
 
 import java.io.IOException;
@@ -61,6 +61,7 @@ public class UUIDIntEncoderTest {
         final int expectedTotalOffset = 128;
 
         final int totalOffset = encoder.write(value);
+        outputBitStream.close();
 
         assertEquals(expectedOutput, toBinaryString(out.buffer, totalOffset));
         assertEquals(expectedTotalOffset, totalOffset);

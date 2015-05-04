@@ -16,8 +16,8 @@
 
 package org.pebble.core.decoding.iterators.ints;
 
-import it.unimi.dsi.io.InputBitStream;
 import org.pebble.core.PebbleBytesStore;
+import org.pebble.core.decoding.InputBitStream;
 
 import java.io.IOException;
 

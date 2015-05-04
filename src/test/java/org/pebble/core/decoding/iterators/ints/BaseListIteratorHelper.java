@@ -16,8 +16,8 @@
 
 package org.pebble.core.decoding.iterators.ints;
 
-import it.unimi.dsi.io.InputBitStream;
 import org.pebble.core.PebbleOffsetsStore;
+import org.pebble.core.decoding.InputBitStream;
 import org.pebble.core.decoding.iterators.Helper;
 import org.pebble.core.encoding.DefaultParametersValues;
 import org.pebble.utils.BytesArrayPebbleBytesStore;

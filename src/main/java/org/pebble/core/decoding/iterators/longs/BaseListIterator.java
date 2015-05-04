@@ -17,8 +17,8 @@
 package org.pebble.core.decoding.iterators.longs;
 
 import it.unimi.dsi.fastutil.longs.LongIterator;
-import it.unimi.dsi.io.InputBitStream;
 import org.pebble.core.PebbleBytesStore;
+import org.pebble.core.decoding.InputBitStream;
 
 import java.io.IOException;
 
