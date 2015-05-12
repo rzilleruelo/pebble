@@ -177,6 +177,9 @@ public class InputBitStream implements Closeable {
      * @throws IOException in case there is an exception reading from input stream.
      */
     public void read(final byte[] buffer, final long size) throws IOException {
+        for (int i = 0, length = (int) (size / 8); i < length; i++) {
+            buffer[i] = 0;
+        }
         for (int i = 0; i < size; i++) {
             buffer[i / 8] |= read() << (7 - (i % 8));
         }

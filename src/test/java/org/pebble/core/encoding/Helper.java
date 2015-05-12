@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class Helper {
 
-    private static final int DEFAULT_DATA_SIZE = 32;
+    private static final int DEFAULT_DATA_SIZE = 1024;
 
     public static String toBinaryString(byte[] bytes, int bitSize) {
         StringBuilder stringBuilder = new StringBuilder(bitSize);
