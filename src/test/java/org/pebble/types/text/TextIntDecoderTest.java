@@ -34,13 +34,30 @@ import static org.pebble.core.decoding.iterators.Helper.getInput;
 public class TextIntDecoderTest {
 
     @Test
-    public void encodeItShouldReturnExpectedDecodedValue() throws IOException {
+    public void decodeItShouldReturnExpectedDecodedValue() throws IOException {
         final Helper.Input input = getInput(
             "00100000 01000101 01011000 01000001 01001101 01010000 01001100 01000101"
         );
         final PebbleOffsetsStore offsetsStore = new LongListPebbleOffsetsStore(new long[] {0L});
         final PebbleBytesStore bytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsetsStore);
         final TextIntDecoder encoder = new TextIntDecoder(bytesStore);
+        final String expectedValue = "EXAMPLE";
+
+        final String value = encoder.read(input.stream);
+
+        assertEquals(expectedValue, value);
+    }
+
+    @Test
+    public void whenBufferContainsPreviousDecodedValueDecodeItShouldReturnExpectedDecodedValue() throws IOException {
+        final Helper.Input input = getInput(
+            "00100000 11111111 11111111 11111111 11111111 11111111 11111111 11111111" +
+            "00100000 01000101 01011000 01000001 01001101 01010000 01001100 01000101"
+        );
+        final PebbleOffsetsStore offsetsStore = new LongListPebbleOffsetsStore(new long[] {0L, 71L});
+        final PebbleBytesStore bytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsetsStore);
+        final TextIntDecoder encoder = new TextIntDecoder(bytesStore);
+        encoder.read(input.stream);
         final String expectedValue = "EXAMPLE";
 
         final String value = encoder.read(input.stream);
