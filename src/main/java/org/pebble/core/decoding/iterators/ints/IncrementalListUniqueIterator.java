@@ -51,7 +51,10 @@ class IncrementalListUniqueIterator extends BaseListIterator {
      * {@inheritDoc}
      */
     @Override
-    protected ReferenceIterator initializeReferenceIterator(int listIndex, InputBitStream inputBitStream) throws IOException {
+    protected ReferenceIterator initializeReferenceIterator(
+        final int listIndex,
+        final InputBitStream inputBitStream
+    ) throws IOException {
         return new IncrementalReferenceUniqueIterator(listIndex, valueBitSize, minIntervalSize, inputBitStream, bytesStore);
     }
 
