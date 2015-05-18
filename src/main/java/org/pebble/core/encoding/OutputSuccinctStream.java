@@ -30,6 +30,7 @@ import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.longs.LongList;
 import it.unimi.dsi.fastutil.longs.LongRBTreeSet;
 import it.unimi.dsi.fastutil.longs.LongSortedSet;
+import org.pebble.core.ListsClassifier;
 import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
 import org.pebble.core.encoding.longs.datastructures.LongReferenceListsStore;
 import org.pebble.core.exceptions.DeltaValueIsTooBigException;
@@ -1287,6 +1288,44 @@ public class OutputSuccinctStream extends OutputBitStream {
             lastIndex = index;
         }
         return offset;
+    }
+
+    public int writeGenericList(
+        final IntList list,
+        final int listIndex,
+        final int valueBitSize,
+        final IntReferenceListsStore referenceListsStore
+    ) throws IOException {
+        switch (ListsClassifier.classify(list)) {
+            case ListsClassifier.SORTED_SET_LIST:
+                writeInt(2, ListsClassifier.SORTED_SET_LIST);
+                return 2 + writeStrictlyIncrementalList(list, listIndex, valueBitSize, referenceListsStore);
+            case ListsClassifier.SORTED_LIST:
+                writeInt(2, ListsClassifier.SORTED_LIST);
+                return 2 + writeIncrementalList(list, listIndex, valueBitSize, referenceListsStore);
+            default:
+                writeInt(2, ListsClassifier.UNSORTED_LIST);
+                return 2 + writeList(list, listIndex, valueBitSize, referenceListsStore);
+        }
+    }
+
+    public int writeGenericList(
+        final LongList list,
+        final int listIndex,
+        final int valueBitSize,
+        final LongReferenceListsStore referenceListsStore
+    ) throws IOException {
+        switch (ListsClassifier.classify(list)) {
+            case ListsClassifier.SORTED_SET_LIST:
+                writeInt(2, ListsClassifier.SORTED_SET_LIST);
+                return 2 + writeStrictlyIncrementalList(list, listIndex, valueBitSize, referenceListsStore);
+            case ListsClassifier.SORTED_LIST:
+                writeInt(2, ListsClassifier.SORTED_LIST);
+                return 2 + writeIncrementalList(list, listIndex, valueBitSize, referenceListsStore);
+            default:
+                writeInt(2, ListsClassifier.UNSORTED_LIST);
+                return 2 + writeList(list, listIndex, valueBitSize, referenceListsStore);
+        }
     }
 
 }
