@@ -136,6 +136,7 @@ public class OutputBitStream implements Flushable, Closeable {
      *     10000000100001001011
      * </pre>
      * @param x value to be encoded.
+     * @param size number of significant bits from <code>x</code> to be written.
      * @return number of written bits.
      * @throws IOException in case there is an exception writing into output stream.
      */
@@ -163,6 +164,7 @@ public class OutputBitStream implements Flushable, Closeable {
      *     100000000000000000000100000000000010000000100001001011
      * </pre>
      * @param x value to be encoded.
+     * @param size number of significant bits from <code>x</code> to be written.
      * @return number of written bits.
      * @throws IOException in case there is an exception writing into output stream.
      */

@@ -33,7 +33,7 @@ public class TypeMapEncoderTest {
 
     @Test
     public void whenValueIsMissingFromMapEncodeItShouldReturnNewIndex() throws IOException {
-        final TypeMapEncoder encoder = build();
+        final TypeMapEncoder<Object> encoder = build();
         final Object element = new Object();
 
         assertEquals(0, encoder.encode(element));
@@ -41,7 +41,7 @@ public class TypeMapEncoderTest {
 
     @Test
     public void whenValueAlreadyExistsInMapEncodeItShouldReturnExistingIndex() throws IOException {
-        final TypeMapEncoder encoder = build();
+        final TypeMapEncoder<Object> encoder = build();
         final Object element = new Object();
         encoder.encode(element);
 
@@ -53,7 +53,7 @@ public class TypeMapEncoderTest {
         throws IOException
     {
         final EncodingInfo encodingInfo = new EncodingInfo();
-        final TypeMapEncoder encoder = build(encodingInfo);
+        final TypeMapEncoder<Object> encoder = build(encodingInfo);
         final Object element = new Object();
         encoder.encode(element);
         encodingInfo.incrementCurrentIndex();
@@ -65,7 +65,7 @@ public class TypeMapEncoderTest {
 
     @Test
     public void whenMapIsFullAndValueIsMissingFromMapEncodeItShouldReturnNewIndex() throws IOException {
-        final TypeMapEncoder encoder = build();
+        final TypeMapEncoder<Object> encoder = build();
         final Object element = new Object();
         encoder.encode(new Object());
         encoder.encode(new Object());
@@ -78,7 +78,7 @@ public class TypeMapEncoderTest {
         throws IOException
     {
         final EncodingInfo encodingInfo = new EncodingInfo();
-        final TypeMapEncoder encoder = build(encodingInfo);
+        final TypeMapEncoder<Object> encoder = build(encodingInfo);
         final Object previousElement = new Object();
         final Object element = new Object();
         encoder.encode(previousElement);
@@ -94,7 +94,7 @@ public class TypeMapEncoderTest {
         throws IOException
     {
         final EncodingInfo encodingInfo = new EncodingInfo();
-        final TypeMapEncoder encoder = build(encodingInfo);
+        final TypeMapEncoder<Object> encoder = build(encodingInfo);
         final Object previousElement = new Object();
         final Object element = new Object();
         encoder.encode(previousElement);
@@ -108,17 +108,17 @@ public class TypeMapEncoderTest {
         assertEquals(7, encoder.encode(element));
     }
 
-    private static TypeMapEncoder build() {
+    private static TypeMapEncoder<Object> build() {
         final EncodingInfo encodingInfo = new EncodingInfo();
         return build(encodingInfo);
     }
 
-    private static TypeMapEncoder build(final EncodingInfo encodingInfo) {
+    private static TypeMapEncoder<Object> build(final EncodingInfo encodingInfo) {
         final int referenceWindowSize = 2;
         final byte[] buffer = new byte[0];
         final OutputBitStream outputBitStream = new OutputBitStream(buffer);
         final PebbleOffsetsStoreWriter offsetsStore = new LongListPebbleOffsetsStore();
-        return new TypeMapEncoder(referenceWindowSize, outputBitStream, offsetsStore, encodingInfo) {
+        return new TypeMapEncoder<Object>(referenceWindowSize, outputBitStream, offsetsStore, encodingInfo) {
             @Override
             public int write(Object element) throws IOException {
                 return 1;

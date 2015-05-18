@@ -312,7 +312,7 @@ public class OutputOffset {
 
     /**
      * Estimates the number of bits required to write a bit.
-     * @param x true --> 1 and false --> 0.
+     * @param x true --&gt; 1 and false --&gt; 0.
      * @return number of bits required to represent the bit <code>x</code>.
      */
     protected static int writeBitOffset(final boolean x) {

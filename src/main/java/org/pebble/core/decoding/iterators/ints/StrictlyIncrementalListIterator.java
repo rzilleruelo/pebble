@@ -35,6 +35,7 @@ public class StrictlyIncrementalListIterator extends BaseListIterator {
      * @param listIndex index of the current list.
      * @param valueBitSize fixed number of bits used to represent value in list to be encoded. It can be any value
      *                     between 1bit and 31 bits.
+     * @param minIntervalSize min size of intervals used to encode the compressed list.
      * @param inputBitStream input bit stream used to read the compressed lists representations.
      * @param bytesStore mapping between list offsets and data bytes arrays and bytes offsets.
      * @throws IOException when there is an exception reading from <code>inputBitStream</code>.
