@@ -1298,13 +1298,13 @@ public class OutputSuccinctStream extends OutputBitStream {
     ) throws IOException {
         switch (ListsClassifier.classify(list)) {
             case ListsClassifier.SORTED_SET_LIST:
-                writeInt(2, ListsClassifier.SORTED_SET_LIST);
+                writeInt(ListsClassifier.SORTED_SET_LIST, 2);
                 return 2 + writeStrictlyIncrementalList(list, listIndex, valueBitSize, referenceListsStore);
             case ListsClassifier.SORTED_LIST:
-                writeInt(2, ListsClassifier.SORTED_LIST);
+                writeInt(ListsClassifier.SORTED_LIST, 2);
                 return 2 + writeIncrementalList(list, listIndex, valueBitSize, referenceListsStore);
             default:
-                writeInt(2, ListsClassifier.UNSORTED_LIST);
+                writeInt(ListsClassifier.UNSORTED_LIST, 2);
                 return 2 + writeList(list, listIndex, valueBitSize, referenceListsStore);
         }
     }
@@ -1317,13 +1317,13 @@ public class OutputSuccinctStream extends OutputBitStream {
     ) throws IOException {
         switch (ListsClassifier.classify(list)) {
             case ListsClassifier.SORTED_SET_LIST:
-                writeInt(2, ListsClassifier.SORTED_SET_LIST);
+                writeInt(ListsClassifier.SORTED_SET_LIST, 2);
                 return 2 + writeStrictlyIncrementalList(list, listIndex, valueBitSize, referenceListsStore);
             case ListsClassifier.SORTED_LIST:
-                writeInt(2, ListsClassifier.SORTED_LIST);
+                writeInt(ListsClassifier.SORTED_LIST, 2);
                 return 2 + writeIncrementalList(list, listIndex, valueBitSize, referenceListsStore);
             default:
-                writeInt(2, ListsClassifier.UNSORTED_LIST);
+                writeInt(ListsClassifier.UNSORTED_LIST, 2);
                 return 2 + writeList(list, listIndex, valueBitSize, referenceListsStore);
         }
     }
