@@ -1,15 +1,20 @@
 package org.pebble.core;
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntIterator;
 import it.unimi.dsi.fastutil.ints.IntList;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.pebble.FastIntegrationTest;
+import org.pebble.core.decoding.iterators.Helper.Input;
+import org.pebble.core.decoding.iterators.ints.GenericListIterator;
 import org.pebble.core.encoding.Helper;
 import org.pebble.core.encoding.OutputSuccinctStream;
 import org.pebble.core.encoding.ints.datastructures.IntReferenceListsIndex;
 import org.pebble.core.encoding.ints.datastructures.IntReferenceListsStore;
 import org.pebble.core.encoding.ints.datastructures.InvertedListIntReferenceListsIndex;
+import org.pebble.utils.BytesArrayPebbleBytesStore;
+import org.pebble.utils.LongListPebbleOffsetsStore;
 
 import java.io.IOException;
 
@@ -83,10 +88,34 @@ public class GenericIntListsTest {
 
     @Test
     public void itShouldDecompressLists() throws IOException {
-        final org.pebble.core.decoding.iterators.Helper.Input input = getInput(
+        final Input input = getInput(
             "00 1 0100 01100 1 0101 00101 0101" +
             "01 01101 1 1 0100 0100 0100 0100 1 1 0100 1 1 1 1" +
             "10 0100 1 1 1 1 00100000 1 0101 0101 0101 0101 01100 01101 00100000 01111 0101 01100 01111 1"
+        );
+        final PebbleOffsetsStore offsetsStore = new LongListPebbleOffsetsStore(new long[] {0L, 26L, 61L});
+        final PebbleBytesStore bytesStore = new BytesArrayPebbleBytesStore(input.buffer, offsetsStore);
+        final int valueBitSize = 5;
+        final IntList[] expectedLists = new IntList[] {
+            new IntArrayList(new int[] {5, 8, 12, 13, 14, 15}),
+            new IntArrayList(new int[] {5, 5, 8, 12, 12, 12, 13, 14, 14, 14, 15, 15}),
+            new IntArrayList(new int[] {5, 8, 12, 13, 14, 12, 14, 5, 13, 14, 12, 15, 15})
+        };
+        final IntList[] lists = new IntList[expectedLists.length];
+        IntList list;
+        IntIterator iterator;
+
+        for(int i = 0; i < lists.length; i++) {
+            iterator = GenericListIterator.build(i, valueBitSize, bytesStore);
+            lists[i] = list = new IntArrayList();
+            while(iterator.hasNext()) {
+                list.add(iterator.nextInt());
+            }
+        }
+
+        assertEquals(
+            Helper.<Integer, IntList>translateToUtilsCollection(expectedLists),
+            Helper.<Integer, IntList>translateToUtilsCollection(lists)
         );
     }
 
