@@ -14,6 +14,7 @@ import org.pebble.core.encoding.ints.datastructures.InvertedListIntReferenceList
 import java.io.IOException;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.pebble.core.decoding.iterators.Helper.getInput;
 import static org.pebble.core.encoding.Helper.getOutput;
 import static org.pebble.core.encoding.Helper.toBinaryString;
 
@@ -82,7 +83,11 @@ public class GenericIntListsTest {
 
     @Test
     public void itShouldDecompressLists() throws IOException {
-
+        final org.pebble.core.decoding.iterators.Helper.Input input = getInput(
+            "00 1 0100 01100 1 0101 00101 0101" +
+            "01 01101 1 1 0100 0100 0100 0100 1 1 0100 1 1 1 1" +
+            "10 0100 1 1 1 1 00100000 1 0101 0101 0101 0101 01100 01101 00100000 01111 0101 01100 01111 1"
+        );
     }
 
 }
