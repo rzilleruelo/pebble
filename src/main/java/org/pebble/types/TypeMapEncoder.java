@@ -65,6 +65,7 @@ public abstract class TypeMapEncoder<T> extends TypeIntEncoder<T> {
      * @param offsetsStore stores the current offset after each element is written.
      * @param encodingInfo encodingInfo used to keep track of relevant encoding information.
      */
+    @SuppressWarnings({"unchecked"})
     public TypeMapEncoder(
         final int referenceWindowSize,
         final OutputBitStream outputBitStream,

@@ -34,13 +34,13 @@ public class TypeIntEncoderTest {
 
     @Test
     public void setIntListItShouldSetExpectedEncodedValuesList() throws IOException {
-        TypeIntEncoder encoder = new TypeIntEncoder() {
+        TypeIntEncoder<Object> encoder = new TypeIntEncoder<Object>() {
             @Override
             protected int encode(Object element) throws IOException {
                 return element.hashCode();
             }
         };
-        List values = new ArrayList(Arrays.asList(new Object[]{
+        List<Object> values = new ArrayList<Object>(Arrays.asList(new Object[]{
             new Object(),
             new Object(),
             new Object()

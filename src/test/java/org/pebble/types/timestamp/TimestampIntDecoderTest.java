@@ -40,9 +40,9 @@ public class TimestampIntDecoderTest {
     @Test
     public void readItShouldReturnIteratorContainingExpectedDecodedValues() throws IOException {
         final List<Timestamp> expectedTimestamps = new ArrayList<Timestamp>();
-        expectedTimestamps.add(Timestamp.valueOf("2015-04-29 18:09:34"));
-        expectedTimestamps.add(Timestamp.valueOf("2015-04-29 18:09:39"));
-        expectedTimestamps.add(Timestamp.valueOf("2015-04-29 18:09:41"));
+        expectedTimestamps.add(new Timestamp(1430356174000L));
+        expectedTimestamps.add(new Timestamp(1430356179000L));
+        expectedTimestamps.add(new Timestamp(1430356181000L));
         /**
          * list=["Wed Apr 29 18:09:34 -0700 2015", "Wed Apr 29 18:09:39 -0700 2015", "Wed Apr 29 18:09:41 -0700 2015"]
          * mapping={

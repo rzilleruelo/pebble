@@ -9,6 +9,7 @@ Build Tool Dependencies
  Project                      | License                    | Project link
 ------------------------------|----------------------------|------------------------------------------------------
  Apache Maven Assembly Plugin | Apache License 2           | http://maven.apache.org/plugins/maven-assembly-plugin/
+ Apache Maven Compiler Plugin | Apache License 2           | http://maven.apache.org/plugins/maven-compiler-plugin/
  Apache Maven Javadoc Plugin  | Apache License 2           | http://maven.apache.org/plugins/maven-javadoc-plugin/
  Apache Maven Source Plugin   | Apache License 2           | http://maven.apache.org/plugins/maven-source-plugin/
  Maven Surefire Plugin        | Apache License 2           | http://maven.apache.org/surefire/maven-surefire-plugin/
