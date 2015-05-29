@@ -48,7 +48,7 @@ public class TextIntDecoder extends TypeMapDecoder<String> {
     @Override
     protected String read(final InputBitStream inputBitStream) throws IOException {
         final int size = inputBitStream.readDelta();
-        inputBitStream.read(buffer, size * 8);
+        inputBitStream.read(buffer, size << 3);
         return new String(buffer, 0, size);
     }
 

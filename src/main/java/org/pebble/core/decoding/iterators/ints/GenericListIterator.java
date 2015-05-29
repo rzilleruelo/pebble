@@ -70,6 +70,7 @@ public class GenericListIterator extends BaseListIterator {
         final PebbleBytesStore bytesStore,
         final InputBitStream inputBitStream
     ) throws IOException {
+        inputBitStream.readInt(2);
         return new GenericListIterator(listIndex, valueBitSize, DEFAULT_MIN_INTERVAL_SIZE, inputBitStream, bytesStore);
     }
 

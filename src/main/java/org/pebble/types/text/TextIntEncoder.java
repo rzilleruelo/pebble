@@ -72,7 +72,7 @@ public class TextIntEncoder extends TypeMapEncoder<String> {
             ));
         }
         final int offset = outputBitStream.writeDelta(size);
-        return offset + (int) outputBitStream.write(element.getBytes(), size * 8);
+        return offset + (int) outputBitStream.write(element.getBytes(), size << 3);
     }
 
 }
